@@ -6239,599 +6239,316 @@
                                 binnen 24 uur een offerte</h6>
                         </div>
                     </div>
-                    <style>
-                        :root {
-                            --primary-color: #e30613;
-                            /* NRT Rood */
-                            --secondary-color: #222;
-                            --bg-color: #f9f9f9;
-                            --text-color: #333;
-                        }
-
-                        body {
-                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                            background-color: var(--bg-color);
-                            color: var(--text-color);
-                        }
-
-                        .form-container {
-                            max-width: 500px;
-                            margin: 40px auto;
-                            background: white;
-                            padding: 30px;
-                            border-radius: 12px;
-                            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-                        }
-
-                        /* Progress Bar */
-                        .progress-container {
-                            margin-bottom: 30px;
-                            display: flex;
-                            justify-content: space-between;
-                            position: relative;
-                        }
-
-                        .progress-step {
-                            width: 30px;
-                            height: 30px;
-                            background: #ddd;
-                            border-radius: 50%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: bold;
-                            z-index: 1;
-                            transition: 0.3s;
-                        }
-
-                        .progress-step.active {
-                            background: var(--primary-color);
-                            color: white;
-                        }
-
-                        .progress-line {
-                            position: absolute;
-                            top: 15px;
-                            left: 0;
-                            height: 2px;
-                            background: #ddd;
-                            width: 100%;
-                            z-index: 0;
-                        }
-
-                        .step {
-                            display: none;
-                        }
-
-                        .step.active {
-                            display: block;
-                            animation: slideIn 0.4s ease-out;
-                        }
-
-                        @keyframes slideIn {
-                            from {
-                                opacity: 0;
-                                transform: translateX(20px);
-                            }
-
-                            to {
-                                opacity: 1;
-                                transform: translateX(0);
-                            }
-                        }
-
-                        h2 {
-                            font-size: 1.5rem;
-                            margin-bottom: 20px;
-                            color: var(--secondary-color);
-                        }
-
-                        label {
-                            display: block;
-                            margin-bottom: 8px;
-                            font-weight: 600;
-                            font-size: 0.95rem;
-                        }
-
-                        input[type="text"],
-                        input[type="email"],
-                        input[type="number"],
-                        select {
-                            width: 100%;
-                            padding: 12px;
-                            margin-bottom: 15px;
-                            border: 1px solid #ccc;
-                            border-radius: 6px;
-                            box-sizing: border-box;
-                            font-size: 1rem;
-                        }
-
-                        /* Radio Buttons Layout */
-                        .radio-group {
-                            display: flex;
-                            gap: 10px;
-                            margin-bottom: 20px;
-                        }
-
-                        .radio-group input[type="radio"] {
-                            display: none;
-                        }
-
-                        .radio-group label {
-                            flex: 1;
-                            text-align: center;
-                            padding: 12px;
-                            border: 1px solid #ccc;
-                            border-radius: 6px;
-                            cursor: pointer;
-                            transition: 0.3s;
-                            background: white;
-                        }
-
-                        .radio-group input[type="radio"]:checked+label {
-                            background: var(--primary-color);
-                            color: white;
-                            border-color: var(--primary-color);
-                        }
-
-                        /* Button Group - Vertical Stack */
-                        .button-group {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 10px;
-                            margin-top: 25px;
-                        }
-
-                        button {
-                            width: 100%;
-                            padding: 14px;
-                            border: none;
-                            border-radius: 6px;
-                            font-size: 1rem;
-                            font-weight: bold;
-                            cursor: pointer;
-                            transition: 0.3s;
-                        }
-
-                        .btn-next {
-                            background-color: var(--primary-color);
-                            color: white;
-                            order: 1;
-                        }
-
-                        /* Volgende boven */
-                        .btn-prev {
-                            background-color: #eee;
-                            color: #666;
-                            order: 2;
-                        }
-
-                        /* Vorige onder */
-                        button:hover {
-                            opacity: 0.9;
-                            transform: translateY(-1px);
-                        }
-
-                        .hidden-question {
-                            display: none;
-                            margin-top: 15px;
-                            padding: 15px;
-                            background: #f0f0f0;
-                            border-radius: 6px;
-                        }
-
-                    
-
-                        /* Scope de CSS voor NRT Elektroservice */
-                        .nrt-form-wrapper {
-                            --nrt-red: #e30613;
-                            --nrt-red-hover: #c70511;
-                            --nrt-red-soft: #fff5f5;
-                            --nrt-red-border: #ffcccc;
-                            --nrt-dark: #222;
-                            --nrt-text: #333;
-                            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-                            color: var(--nrt-text);
-                        }
-
-                        .nrt-form-container {
-                            max-width: 750px;
-                            margin: 30px auto;
-                            background: white;
-                            padding: 40px;
-                            border-radius: 15px;
-                            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-                            box-sizing: border-box;
-                        }
-
-                        /* Progress Bar */
-                        .nrt-progress-container {
-                            margin-bottom: 40px;
-                            display: flex;
-                            justify-content: space-between;
-                            position: relative;
-                            max-width: 95%;
-                            margin-left: auto;
-                            margin-right: auto;
-                        }
-
-                        .nrt-progress-step {
-                            width: 38px;
-                            height: 38px;
-                            background: #f0f0f0;
-                            color: #888;
-                            border-radius: 50%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: bold;
-                            z-index: 1;
-                            transition: 0.4s;
-                            font-size: 15px;
-                            border: 3px solid white;
-                        }
-
-                        .nrt-progress-step.active {
-                            background: #e30613 !important;
-                            color: white !important;
-                            box-shadow: 0 0 12px rgba(227, 6, 19, 0.4);
-                        }
-
-                        .nrt-progress-line {
-                            position: absolute;
-                            top: 19px;
-                            left: 0;
-                            height: 4px;
-                            background: #f0f0f0;
-                            width: 100%;
-                            z-index: 0;
-                            transform: translateY(-50%);
-                        }
-
-                        /* Stappen & Animatie */
-                        .nrt-step {
-                            display: none;
-                        }
-
-                        .nrt-step.active {
-                            display: block;
-                            animation: nrtSlideIn 0.4s ease-out;
-                        }
-
-                        @keyframes nrtSlideIn {
-                            from {
-                                opacity: 0;
-                                transform: translateY(10px);
-                            }
-
-                            to {
-                                opacity: 1;
-                                transform: translateY(0);
-                            }
-                        }
-
-                        .nrt-form-wrapper h2 {
-                            font-size: 1.6rem;
-                            margin-bottom: 25px;
-                            color: var(--nrt-dark);
-                            font-weight: 700;
-                        }
-
-                        .nrt-form-wrapper label.sub-header {
-                            display: block;
-                            margin-bottom: 15px;
-                            font-weight: 700;
-                            font-size: 1.1rem;
-                            color: #555;
-                        }
-
-                        .nrt-form-wrapper label {
-                            display: block;
-                            margin-bottom: 12px;
-                            font-weight: 600;
-                        }
-
-                        .nrt-input-field {
-                            width: 100%;
-                            padding: 16px;
-                            margin-bottom: 15px;
-                            border: 2px solid #eee;
-                            border-radius: 10px;
-                            box-sizing: border-box;
-                            font-size: 1rem;
-                            transition: 0.3s;
-                        }
-
-                        .nrt-input-field:focus {
-                            border-color: var(--nrt-red);
-                            outline: none;
-                        }
-
-                        /* Radio Buttons */
-                        .nrt-radio-group {
-                            display: flex;
-                            gap: 15px;
-                            margin-bottom: 30px;
-                            flex-wrap: wrap;
-                        }
-
-                        .nrt-radio-group input[type="radio"] {
-                            display: none;
-                        }
-
-                        .nrt-radio-group label {
-                            flex: 1 1 calc(50% - 15px);
-                            text-align: center;
-                            padding: 18px;
-                            border: 2px solid #eee;
-                            border-radius: 10px;
-                            cursor: pointer;
-                            transition: 0.3s;
-                            background: white;
-                            font-weight: 600;
-                        }
-
-                        .nrt-radio-group input[type="radio"]:checked+label {
-                            background: var(--nrt-red-soft) !important;
-                            color: var(--nrt-red) !important;
-                            border-color: var(--nrt-red) !important;
-                        }
-
-                        /* Knoppen Groep */
-                        .nrt-button-group {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 12px;
-                            margin-top: 35px;
-                        }
-
-                        .nrt-btn {
-                            width: 100%;
-                            padding: 18px;
-                            border: none;
-                            border-radius: 10px;
-                            font-size: 1.1rem;
-                            font-weight: 800;
-                            cursor: pointer;
-                            transition: 0.3s;
-                            text-align: center;
-                            text-transform: uppercase;
-                            letter-spacing: 0.5px;
-                        }
-
-                        .nrt-btn-next {
-                            background-color: #e30613 !important;
-                            color: white !important;
-                            order: 1;
-                            box-shadow: 0 6px 20px rgba(227, 6, 19, 0.3);
-                        }
-
-                        .nrt-btn-next:hover {
-                            background-color: #c70511 !important;
-                            transform: translateY(-2px);
-                        }
-
-                        .nrt-btn-prev {
-                            background-color: #fff5f5 !important;
-                            color: #e30613 !important;
-                            order: 2;
-                            border: 2px solid #ffcccc !important;
-                        }
-
-                        .hidden-question {
-                            display: none;
-                            margin-top: 20px;
-                            padding: 25px;
-                            background: #fafafa;
-                            border-radius: 10px;
-                            border: 2px dashed #ffcccc;
-                        }
-                    </style>
-
-                    <div class="nrt-form-wrapper">
-                        <div class="nrt-form-container">
-                            <div class="nrt-progress-container">
-                                <div class="nrt-progress-line"></div>
-                                <div class="nrt-progress-step active" id="p1">1</div>
-                                <div class="nrt-progress-step" id="p2">2</div>
-                                <div class="nrt-progress-step" id="p3">3</div>
-                                <div class="nrt-progress-step" id="p4">4</div>
-                                <div class="nrt-progress-step" id="p5">5</div>
-                                <div class="nrt-progress-step" id="p6">6</div>
-                                <div class="nrt-progress-step" id="p7">7</div>
-                            </div>
-
-                            <form id="nrtOfferteForm">
-
-                                <div class="nrt-step active" id="step1">
-                                    <h2>Wat voor installatie betreft het?</h2>
-                                    <div class="nrt-radio-group">
-                                        <input type="radio" name="installatie_type" id="particulier" value="Particulier"
-                                            checked>
-                                        <label for="particulier">Particulier</label>
-                                        <input type="radio" name="installatie_type" id="zakelijk" value="Zakelijk">
-                                        <label for="zakelijk">Zakelijk</label>
-                                    </div>
-                                    <div class="nrt-button-group">
-                                        <button type="button" class="nrt-btn nrt-btn-next"
-                                            onclick="changeStep(1, 2)">Volgende</button>
-                                    </div>
-                                </div>
-
-                                <div class="nrt-step" id="step2">
-                                    <h2>Welke laadpaal kiest u?</h2>
-                                    <div class="nrt-radio-group">
-                                        <input type="radio" name="laadpaal_keuze" id="zaptec2" value="Zaptec Go 2"
-                                            checked>
-                                        <label for="zaptec2">Zaptec Go 2</label>
-                                        <input type="radio" name="laadpaal_keuze" id="zaptec" value="Zaptec Go">
-                                        <label for="zaptec">Zaptec Go</label>
-                                        <input type="radio" name="laadpaal_keuze" id="peblar" value="Peblar Home">
-                                        <label for="peblar">Peblar Home</label>
-                                        <input type="radio" name="laadpaal_keuze" id="adviseer" value="Adviseer mij">
-                                        <label for="adviseer">Adviseer mij</label>
-                                    </div>
-                                    <div class="nrt-button-group">
-                                        <button type="button" class="nrt-btn nrt-btn-next"
-                                            onclick="changeStep(2, 3)">Volgende</button>
-                                        <button type="button" class="nrt-btn nrt-btn-prev"
-                                            onclick="changeStep(2, 1)">Vorige</button>
-                                    </div>
-                                </div>
-
-                                <div class="nrt-step" id="step3">
-                                    <h2>Locatie en voertuig</h2>
-
-                                    <label class="sub-header">Waar wilt u de laadpaal laten plaatsen?</label>
-                                    <div class="nrt-radio-group">
-                                        <input type="radio" name="locatie" id="woning" value="Bij uw woning" checked>
-                                        <label for="woning">Bij uw woning</label>
-                                        <input type="radio" name="locatie" id="bedrijf" value="Bij uw bedrijf">
-                                        <label for="bedrijf">Bij uw bedrijf</label>
-                                    </div>
-
-                                    <label class="sub-header">Wat voor soort auto heeft u?</label>
-                                    <div class="nrt-radio-group">
-                                        <input type="radio" name="auto_type" id="hybride" value="Hybride" checked>
-                                        <label for="hybride">Hybride</label>
-                                        <input type="radio" name="auto_type" id="elektrisch" value="Elektrisch">
-                                        <label for="elektrisch">Elektrisch</label>
-                                    </div>
-
-                                    <div class="nrt-button-group">
-                                        <button type="button" class="nrt-btn nrt-btn-next"
-                                            onclick="changeStep(3, 4)">Volgende</button>
-                                        <button type="button" class="nrt-btn nrt-btn-prev"
-                                            onclick="changeStep(3, 2)">Vorige</button>
-                                    </div>
-                                </div>
-
-                                <div class="nrt-step" id="step4">
-                                    <h2>Waar wilt u de laadpaal gemonteerd hebben?</h2>
-                                    <div class="nrt-radio-group">
-                                        <input type="radio" name="montage" id="wand" value="Wandmontage" checked>
-                                        <label for="wand">Wandmontage</label>
-                                        <input type="radio" name="montage" id="paal" value="Op een montagepaal">
-                                        <label for="paal">Op een montagepaal</label>
-                                    </div>
-                                    <div class="nrt-button-group">
-                                        <button type="button" class="nrt-btn nrt-btn-next"
-                                            onclick="changeStep(4, 5)">Volgende</button>
-                                        <button type="button" class="nrt-btn nrt-btn-prev"
-                                            onclick="changeStep(4, 3)">Vorige</button>
-                                    </div>
-                                </div>
-
-                                <div class="nrt-step" id="step5">
-                                    <h2>Afstand tot de groepenkast</h2>
-                                    <label for="afstand_kast">Wat is de afstand van de groepenkast tot de laadpaal in
-                                        meters? *</label>
-                                    <input type="number" id="afstand_kast" name="afstand_kast" class="nrt-input-field"
-                                        placeholder="Bijv. 15" required>
-                                    <div class="nrt-button-group">
-                                        <button type="button" class="nrt-btn nrt-btn-next"
-                                            onclick="changeStep(5, 6)">Volgende</button>
-                                        <button type="button" class="nrt-btn nrt-btn-prev"
-                                            onclick="changeStep(5, 4)">Vorige</button>
-                                    </div>
-                                </div>
-
-                                <div class="nrt-step" id="step6">
-                                    <h2>Zijn er graafwerkzaamheden nodig?</h2>
-                                    <div class="nrt-radio-group">
-                                        <input type="radio" name="graafwerk" id="graaf_ja" value="Ja"
-                                            onclick="toggleGraaf(true)">
-                                        <label for="graaf_ja">Ja</label>
-                                        <input type="radio" name="graafwerk" id="graaf_nee" value="Nee"
-                                            onclick="toggleGraaf(false)" checked>
-                                        <label for="graaf_nee">Nee</label>
-                                    </div>
-
-                                    <div id="graafafstand_box" class="hidden-question">
-                                        <label for="graaf_afstand">Wat is de graafafstand? (in meters) *</label>
-                                        <input type="number" name="graaf_afstand" id="graaf_afstand"
-                                            class="nrt-input-field" placeholder="Bijv. 8">
-                                    </div>
-
-                                    <div class="nrt-button-group">
-                                        <button type="button" class="nrt-btn nrt-btn-next"
-                                            onclick="changeStep(6, 7)">Volgende</button>
-                                        <button type="button" class="nrt-btn nrt-btn-prev"
-                                            onclick="changeStep(6, 5)">Vorige</button>
-                                    </div>
-                                </div>
-
-                                <div class="nrt-step" id="step7">
-                                    <h2>Bijna klaar! Uw gegevens</h2>
-                                    <label for="naam">Volledige Naam *</label>
-                                    <input type="text" id="naam" name="naam" class="nrt-input-field"
-                                        placeholder="Uw naam" required>
-
-                                    <label for="email">E-mailadres *</label>
-                                    <input type="email" id="email" name="email" class="nrt-input-field"
-                                        placeholder="uw@email.nl" required>
-
-                                    <label for="tel">Telefoonnummer *</label>
-                                    <input type="text" id="tel" name="tel" class="nrt-input-field"
-                                        placeholder="06 12345678" required>
-
-                                    <div class="nrt-button-group">
-                                        <button type="submit" class="nrt-btn nrt-btn-next">Verzend Offerte</button>
-                                        <button type="button" class="nrt-btn nrt-btn-prev"
-                                            onclick="changeStep(7, 6)">Vorige</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+<style>
+    /* Scope de CSS voor NRT Elektroservice */
+    .nrt-form-wrapper {
+        --nrt-red: #e30613;
+        --nrt-red-hover: #c70511;
+        --nrt-red-soft: #fff5f5;
+        --nrt-red-border: #ffcccc;
+        --nrt-dark: #222;
+        --nrt-text: #333;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        color: var(--nrt-text);
+    }
+
+    .nrt-form-container {
+        max-width: 750px; 
+        margin: 30px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        box-sizing: border-box;
+    }
+    
+    /* Progress Bar */
+    .nrt-progress-container { 
+        margin-bottom: 40px; 
+        display: flex; 
+        justify-content: space-between; 
+        position: relative; 
+        max-width: 95%;
+        margin-left: auto; 
+        margin-right: auto;
+    }
+    .nrt-progress-step { 
+        width: 38px; height: 38px;
+        background: #f0f0f0; 
+        color: #888;
+        border-radius: 50%; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        font-weight: bold; 
+        z-index: 1; 
+        transition: 0.4s; 
+        font-size: 15px;
+        border: 3px solid white;
+    }
+    .nrt-progress-step.active { 
+        background: #e30613 !important; 
+        color: white !important; 
+        box-shadow: 0 0 12px rgba(227, 6, 19, 0.4);
+    }
+    .nrt-progress-line { 
+        position: absolute; 
+        top: 19px; 
+        left: 0; 
+        height: 4px; 
+        background: #f0f0f0; 
+        width: 100%; 
+        z-index: 0; 
+        transform: translateY(-50%);
+    }
+
+    /* Stappen & Animatie */
+    .nrt-step { display: none; }
+    .nrt-step.active { display: block; animation: nrtSlideIn 0.4s ease-out; }
+    @keyframes nrtSlideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .nrt-form-wrapper h2 { font-size: 1.6rem; margin-bottom: 25px; color: var(--nrt-dark); font-weight: 700; }
+    .nrt-form-wrapper label.sub-header { display: block; margin-bottom: 15px; font-weight: 700; font-size: 1.1rem; color: #555; }
+    .nrt-form-wrapper label { display: block; margin-bottom: 12px; font-weight: 600; }
+    
+    .nrt-input-field {
+        width: 100%; padding: 16px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 1rem; transition: 0.3s;
+    }
+    .nrt-input-field:focus { border-color: var(--nrt-red); outline: none; }
+
+    /* Radio Buttons */
+    .nrt-radio-group { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
+    .nrt-radio-group input[type="radio"] { display: none; }
+    .nrt-radio-group label {
+        flex: 1 1 calc(50% - 15px);
+        text-align: center; padding: 18px; border: 2px solid #eee; border-radius: 10px; cursor: pointer; transition: 0.3s; background: white; font-weight: 600;
+    }
+    .nrt-radio-group input[type="radio"]:checked + label { background: var(--nrt-red-soft) !important; color: var(--nrt-red) !important; border-color: var(--nrt-red) !important; }
+
+    /* Knoppen Groep */
+    .nrt-button-group { display: flex; flex-direction: column; gap: 12px; margin-top: 35px; }
+    .nrt-btn {
+        width: 100%; padding: 18px; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    
+    .nrt-btn-next { 
+        background-color: #e30613 !important; 
+        color: white !important; 
+        order: 1; 
+        box-shadow: 0 6px 20px rgba(227, 6, 19, 0.3); 
+    }
+    .nrt-btn-next:hover { background-color: #c70511 !important; transform: translateY(-2px); }
+
+    .nrt-btn-prev { 
+        background-color: #fff5f5 !important; 
+        color: #e30613 !important; 
+        order: 2; 
+        border: 2px solid #ffcccc !important;
+    }
+
+    .hidden-question { display: none; margin-top: 20px; padding: 25px; background: #fafafa; border-radius: 10px; border: 2px dashed #ffcccc; }
+</style>
+
+<div class="nrt-form-wrapper">
+    <div class="nrt-form-container">
+        <div class="nrt-progress-container">
+            <div class="nrt-progress-line"></div>
+            <div class="nrt-progress-step active" id="p1">1</div>
+            <div class="nrt-progress-step" id="p2">2</div>
+            <div class="nrt-progress-step" id="p3">3</div>
+            <div class="nrt-progress-step" id="p4">4</div>
+            <div class="nrt-progress-step" id="p5">5</div>
+            <div class="nrt-progress-step" id="p6">6</div>
+            <div class="nrt-progress-step" id="p7">7</div>
+        </div>
+
+        <form id="nrtOfferteForm">
+            
+            <div class="nrt-step active" id="step1">
+                <h2>Wat voor installatie betreft het?</h2>
+                <div class="nrt-radio-group">
+                    <input type="radio" name="installatie_type" id="particulier" value="Particulier" checked onchange="updateLaadpaalOpties()">
+                    <label for="particulier">Particulier</label>
+                    <input type="radio" name="installatie_type" id="zakelijk" value="Zakelijk" onchange="updateLaadpaalOpties()">
+                    <label for="zakelijk">Zakelijk</label>
+                </div>
+                <div class="nrt-button-group">
+                    <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(1, 2)">Volgende</button>
+                </div>
+            </div>
+
+            <div class="nrt-step" id="step2">
+                <h2>Welke laadpaal kiest u?</h2>
+                <div class="nrt-radio-group" id="paal_opties_container">
                     </div>
+                <div class="nrt-button-group">
+                    <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(2, 3)">Volgende</button>
+                    <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(2, 1)">Vorige</button>
+                </div>
+            </div>
 
-                    <script>
-                        function changeStep(current, next) {
-                            if (next > current) {
-                                const currentStepEl = document.getElementById('step' + current);
-                                const inputs = currentStepEl.querySelectorAll('input[required]');
-                                let valid = true;
-                                inputs.forEach(input => {
-                                    if (!input.value) {
-                                        input.style.borderColor = '#e30613';
-                                        valid = false;
-                                    } else {
-                                        input.style.borderColor = '#eee';
-                                    }
-                                });
-                                if (!valid) return;
-                            }
+            <div class="nrt-step" id="step3">
+                <h2>Locatie en voertuig</h2>
+                <label class="sub-header">Waar wilt u de laadpaal laten plaatsen?</label>
+                <div class="nrt-radio-group">
+                    <input type="radio" name="locatie" id="woning" value="Bij uw woning" checked>
+                    <label for="woning">Bij uw woning</label>
+                    <input type="radio" name="locatie" id="bedrijf" value="Bij uw bedrijf">
+                    <label for="bedrijf">Bij uw bedrijf</label>
+                </div>
 
-                            document.getElementById('step' + current).classList.remove('active');
-                            document.getElementById('step' + next).classList.add('active');
+                <label class="sub-header">Wat voor soort auto heeft u?</label>
+                <div class="nrt-radio-group">
+                    <input type="radio" name="auto_type" id="hybride" value="Hybride" checked>
+                    <label for="hybride">Hybride</label>
+                    <input type="radio" name="auto_type" id="elektrisch" value="Elektrisch">
+                    <label for="elektrisch">Elektrisch</label>
+                </div>
 
-                            document.querySelectorAll('.nrt-progress-step').forEach((step, index) => {
-                                if (index < next) {
-                                    step.classList.add('active');
-                                } else {
-                                    step.classList.remove('active');
-                                }
-                            });
-                        }
+                <div class="nrt-button-group">
+                    <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(3, 4)">Volgende</button>
+                    <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(3, 2)">Vorige</button>
+                </div>
+            </div>
 
-                        function toggleGraaf(show) {
-                            const box = document.getElementById('graafafstand_box');
-                            const input = document.getElementById('graaf_afstand');
-                            if (show) {
-                                box.style.display = 'block';
-                                input.setAttribute('required', 'required');
-                            } else {
-                                box.style.display = 'none';
-                                input.removeAttribute('required');
-                                input.value = '';
-                            }
-                        }
+            <div class="nrt-step" id="step4">
+                <h2>Waar wilt u de laadpaal gemonteerd hebben?</h2>
+                <div class="nrt-radio-group">
+                    <input type="radio" name="montage" id="wand" value="Wandmontage" checked>
+                    <label for="wand">Wandmontage</label>
+                    <input type="radio" name="montage" id="paal" value="Op een montagepaal">
+                    <label for="paal">Op een montagepaal</label>
+                </div>
+                <div class="nrt-button-group">
+                    <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(4, 5)">Volgende</button>
+                    <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(4, 3)">Vorige</button>
+                </div>
+            </div>
 
-                        document.getElementById('nrtOfferteForm').onsubmit = function (e) {
-                            e.preventDefault();
-                            alert('Bedankt! We hebben uw aanvraag ontvangen en nemen snel contact met u op.');
-                        };
-                    </script>
+            <div class="nrt-step" id="step5">
+                <h2>Afstand tot de groepenkast</h2>
+                <label for="afstand_kast">Wat is de afstand van de groepenkast tot de laadpaal in meters? *</label>
+                <input type="number" id="afstand_kast" name="afstand_kast" class="nrt-input-field" placeholder="Bijv. 15" required>
+                <div class="nrt-button-group">
+                    <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(5, 6)">Volgende</button>
+                    <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(5, 4)">Vorige</button>
+                </div>
+            </div>
+
+            <div class="nrt-step" id="step6">
+                <h2>Zijn er graafwerkzaamheden nodig?</h2>
+                <div class="nrt-radio-group">
+                    <input type="radio" name="graafwerk" id="graaf_ja" value="Ja" onclick="toggleGraaf(true)">
+                    <label for="graaf_ja">Ja</label>
+                    <input type="radio" name="graafwerk" id="graaf_nee" value="Nee" onclick="toggleGraaf(false)" checked>
+                    <label for="graaf_nee">Nee</label>
+                </div>
+
+                <div id="graafafstand_box" class="hidden-question">
+                    <label for="graaf_afstand">Wat is de graafafstand? (in meters) *</label>
+                    <input type="number" name="graaf_afstand" id="graaf_afstand" class="nrt-input-field" placeholder="Bijv. 8">
+                </div>
+
+                <div class="nrt-button-group">
+                    <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(6, 7)">Volgende</button>
+                    <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(6, 5)">Vorige</button>
+                </div>
+            </div>
+
+            <div class="nrt-step" id="step7">
+                <h2>Bijna klaar! Uw gegevens</h2>
+                <label for="naam">Volledige Naam *</label>
+                <input type="text" id="naam" name="naam" class="nrt-input-field" placeholder="Uw naam" required>
+                <label for="email">E-mailadres *</label>
+                <input type="email" id="email" name="email" class="nrt-input-field" placeholder="uw@email.nl" required>
+                <label for="tel">Telefoonnummer *</label>
+                <input type="text" id="tel" name="tel" class="nrt-input-field" placeholder="06 12345678" required>
+
+                <div class="nrt-button-group">
+                    <button type="submit" class="nrt-btn nrt-btn-next">Verzend Offerte</button>
+                    <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(7, 6)">Vorige</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Inhoud voor de dynamische stap 2
+    const opties = {
+        particulier: [
+            { id: 'zaptec2', val: 'Zaptec Go 2', label: 'Zaptec Go 2' },
+            { id: 'zaptec', val: 'Zaptec Go', label: 'Zaptec Go' },
+            { id: 'peblar', val: 'Peblar Home', label: 'Peblar Home' },
+            { id: 'adviseer', val: 'Adviseer mij', label: 'Adviseer mij' }
+        ],
+        zakelijk: [
+            { id: 'zaptecpro', val: 'Zaptec Pro', label: 'Zaptec Pro' },
+            { id: 'peblarbus', val: 'Peblar Business', label: 'Peblar Business' },
+            { id: 'adviseer', val: 'Adviseer mij', label: 'Adviseer mij' }
+        ]
+    };
+
+    function updateLaadpaalOpties() {
+        const container = document.getElementById('paal_opties_container');
+        const isZakelijk = document.getElementById('zakelijk').checked;
+        const set = isZakelijk ? opties.zakelijk : opties.particulier;
+        
+        container.innerHTML = set.map((o, index) => `
+            <input type="radio" name="laadpaal_keuze" id="${o.id}" value="${o.val}" ${index === 0 ? 'checked' : ''}>
+            <label for="${o.id}">${o.label}</label>
+        `).join('');
+    }
+
+    // Initialiseer opties bij laden
+    updateLaadpaalOpties();
+
+    function changeStep(current, next) {
+        if (next > current) {
+            const currentStepEl = document.getElementById('step' + current);
+            const inputs = currentStepEl.querySelectorAll('input[required]');
+            let valid = true;
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.style.borderColor = '#e30613';
+                    valid = false;
+                } else {
+                    input.style.borderColor = '#eee';
+                }
+            });
+            if (!valid) return;
+        }
+
+        document.getElementById('step' + current).classList.remove('active');
+        document.getElementById('step' + next).classList.add('active');
+
+        document.querySelectorAll('.nrt-progress-step').forEach((step, index) => {
+            if (index < next) {
+                step.classList.add('active');
+            } else {
+                step.classList.remove('active');
+            }
+        });
+    }
+
+    function toggleGraaf(show) {
+        const box = document.getElementById('graafafstand_box');
+        const input = document.getElementById('graaf_afstand');
+        if (show) {
+            box.style.display = 'block';
+            input.setAttribute('required', 'required');
+        } else {
+            box.style.display = 'none';
+            input.removeAttribute('required');
+            input.value = '';
+        }
+    }
+
+    document.getElementById('nrtOfferteForm').onsubmit = function(e) {
+        e.preventDefault();
+        alert('Bedankt! Uw aanvraag is verzonden naar NRT Elektroservice.');
+    };
+</script>
                     <!-- <div class="elementor-element elementor-element-1e67581 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
                         data-element_type="container" data-id="1e67581"
                         data-settings='{"background_background":"classic"}' id="Offerte">
