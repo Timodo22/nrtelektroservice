@@ -6250,6 +6250,7 @@
         --nrt-text: #333;
         font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         color: var(--nrt-text);
+        scroll-margin-top: 100px; /* Zorgt voor ruimte boven het formulier bij scrollen */
     }
 
     .nrt-form-container {
@@ -6309,12 +6310,15 @@
 
     .nrt-form-wrapper h2 { font-size: 1.6rem; margin-bottom: 25px; color: var(--nrt-dark); font-weight: 700; }
     .nrt-form-wrapper label.sub-header { display: block; margin-bottom: 15px; font-weight: 700; font-size: 1.1rem; color: #555; }
-    .nrt-form-wrapper label { display: block; margin-bottom: 12px; font-weight: 600; }
+    .nrt-form-wrapper label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
     
     .nrt-input-field {
-        width: 100%; padding: 16px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 1rem; transition: 0.3s;
+        width: 100%; padding: 14px; margin-bottom: 15px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 1rem; transition: 0.3s;
     }
     .nrt-input-field:focus { border-color: var(--nrt-red); outline: none; }
+
+    /* Grid voor adresgegevens */
+    .nrt-input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
 
     /* Radio Buttons */
     .nrt-radio-group { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; }
@@ -6325,31 +6329,36 @@
     }
     .nrt-radio-group input[type="radio"]:checked + label { background: var(--nrt-red-soft) !important; color: var(--nrt-red) !important; border-color: var(--nrt-red) !important; }
 
+    /* Upload Box */
+    .nrt-upload-box {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        background: #fafafa;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .nrt-upload-box:hover { border-color: var(--nrt-red); background: var(--nrt-red-soft); }
+    .nrt-upload-box p { margin: 0; font-size: 0.9rem; color: #666; }
+    .nrt-upload-box b { color: var(--nrt-red); }
+    .nrt-upload-box input[type="file"] { display: none; }
+
     /* Knoppen Groep */
     .nrt-button-group { display: flex; flex-direction: column; gap: 12px; margin-top: 35px; }
     .nrt-btn {
         width: 100%; padding: 18px; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 800; cursor: pointer; transition: 0.3s; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;
     }
     
-    .nrt-btn-next { 
-        background-color: #e30613 !important; 
-        color: white !important; 
-        order: 1; 
-        box-shadow: 0 6px 20px rgba(227, 6, 19, 0.3); 
-    }
+    .nrt-btn-next { background-color: #e30613 !important; color: white !important; order: 1; box-shadow: 0 6px 20px rgba(227, 6, 19, 0.3); }
     .nrt-btn-next:hover { background-color: #c70511 !important; transform: translateY(-2px); }
-
-    .nrt-btn-prev { 
-        background-color: #fff5f5 !important; 
-        color: #e30613 !important; 
-        order: 2; 
-        border: 2px solid #ffcccc !important;
-    }
+    .nrt-btn-prev { background-color: #fff5f5 !important; color: #e30613 !important; order: 2; border: 2px solid #ffcccc !important; }
 
     .hidden-question { display: none; margin-top: 20px; padding: 25px; background: #fafafa; border-radius: 10px; border: 2px dashed #ffcccc; }
 </style>
 
-<div class="nrt-form-wrapper">
+<div class="nrt-form-wrapper" id="nrtFormTop">
     <div class="nrt-form-container">
         <div class="nrt-progress-container">
             <div class="nrt-progress-line"></div>
@@ -6362,7 +6371,7 @@
             <div class="nrt-progress-step" id="p7">7</div>
         </div>
 
-        <form id="nrtOfferteForm">
+        <form id="nrtOfferteForm" enctype="multipart/form-data">
             
             <div class="nrt-step active" id="step1">
                 <h2>Wat voor installatie betreft het?</h2>
@@ -6379,8 +6388,7 @@
 
             <div class="nrt-step" id="step2">
                 <h2>Welke laadpaal kiest u?</h2>
-                <div class="nrt-radio-group" id="paal_opties_container">
-                    </div>
+                <div class="nrt-radio-group" id="paal_opties_container"></div>
                 <div class="nrt-button-group">
                     <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(2, 3)">Volgende</button>
                     <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(2, 1)">Vorige</button>
@@ -6396,7 +6404,6 @@
                     <input type="radio" name="locatie" id="bedrijf" value="Bij uw bedrijf">
                     <label for="bedrijf">Bij uw bedrijf</label>
                 </div>
-
                 <label class="sub-header">Wat voor soort auto heeft u?</label>
                 <div class="nrt-radio-group">
                     <input type="radio" name="auto_type" id="hybride" value="Hybride" checked>
@@ -6404,7 +6411,6 @@
                     <input type="radio" name="auto_type" id="elektrisch" value="Elektrisch">
                     <label for="elektrisch">Elektrisch</label>
                 </div>
-
                 <div class="nrt-button-group">
                     <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(3, 4)">Volgende</button>
                     <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(3, 2)">Vorige</button>
@@ -6443,12 +6449,10 @@
                     <input type="radio" name="graafwerk" id="graaf_nee" value="Nee" onclick="toggleGraaf(false)" checked>
                     <label for="graaf_nee">Nee</label>
                 </div>
-
                 <div id="graafafstand_box" class="hidden-question">
                     <label for="graaf_afstand">Wat is de graafafstand? (in meters) *</label>
                     <input type="number" name="graaf_afstand" id="graaf_afstand" class="nrt-input-field" placeholder="Bijv. 8">
                 </div>
-
                 <div class="nrt-button-group">
                     <button type="button" class="nrt-btn nrt-btn-next" onclick="changeStep(6, 7)">Volgende</button>
                     <button type="button" class="nrt-btn nrt-btn-prev" onclick="changeStep(6, 5)">Vorige</button>
@@ -6456,13 +6460,42 @@
             </div>
 
             <div class="nrt-step" id="step7">
-                <h2>Bijna klaar! Uw gegevens</h2>
-                <label for="naam">Volledige Naam *</label>
-                <input type="text" id="naam" name="naam" class="nrt-input-field" placeholder="Uw naam" required>
-                <label for="email">E-mailadres *</label>
-                <input type="email" id="email" name="email" class="nrt-input-field" placeholder="uw@email.nl" required>
-                <label for="tel">Telefoonnummer *</label>
-                <input type="text" id="tel" name="tel" class="nrt-input-field" placeholder="06 12345678" required>
+                <h2>Uw gegevens & Foto's</h2>
+                
+                <div class="nrt-input-grid">
+                    <div><label>Voornaam *</label><input type="text" name="voornaam" class="nrt-input-field" required></div>
+                    <div><label>Achternaam *</label><input type="text" name="achternaam" class="nrt-input-field" required></div>
+                </div>
+
+                <div class="nrt-input-grid">
+                    <div><label>Telefoonnummer *</label><input type="tel" name="tel" class="nrt-input-field" required></div>
+                    <div><label>E-mailadres *</label><input type="email" name="email" class="nrt-input-field" required></div>
+                </div>
+
+                <div class="nrt-input-grid">
+                    <div><label>Postcode *</label><input type="text" name="postcode" class="nrt-input-field" required></div>
+                    <div><label>Huisnummer *</label><input type="text" name="huisnummer" class="nrt-input-field" required></div>
+                </div>
+                
+                <label>Stad *</label>
+                <input type="text" name="stad" class="nrt-input-field" required>
+
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+                <label>Voeg hier uw foto’s toe van uw groepenkast en slimme meter, <a href="#" style="color:var(--nrt-red)">zie voorbeelden</a></label>
+                <div class="nrt-upload-box" onclick="document.getElementById('file1').click()">
+                    <p id="file1-text">Verslepen en neerzetten (of) <b>kies bestanden</b></p>
+                    <input type="file" id="file1" name="fotos_kast[]" multiple accept="image/*" onchange="updateFileText('file1')">
+                </div>
+
+                <label>Voeg hier uw foto’s toe van de route van de groepenkast tot aan de locatie van de laadpaal</label>
+                <div class="nrt-upload-box" onclick="document.getElementById('file2').click()">
+                    <p id="file2-text">Verslepen en neerzetten (of) <b>kies bestanden</b></p>
+                    <input type="file" id="file2" name="fotos_route[]" multiple accept="image/*" onchange="updateFileText('file2')">
+                </div>
+
+                <label>Heeft u nog opmerkingen of aanvullende informatie?</label>
+                <textarea name="opmerkingen" class="nrt-input-field" rows="4" style="height:auto;"></textarea>
 
                 <div class="nrt-button-group">
                     <button type="submit" class="nrt-btn nrt-btn-next">Verzend Offerte</button>
@@ -6474,7 +6507,6 @@
 </div>
 
 <script>
-    // Inhoud voor de dynamische stap 2
     const opties = {
         particulier: [
             { id: 'zaptec2', val: 'Zaptec Go 2', label: 'Zaptec Go 2' },
@@ -6493,14 +6525,12 @@
         const container = document.getElementById('paal_opties_container');
         const isZakelijk = document.getElementById('zakelijk').checked;
         const set = isZakelijk ? opties.zakelijk : opties.particulier;
-        
         container.innerHTML = set.map((o, index) => `
             <input type="radio" name="laadpaal_keuze" id="${o.id}" value="${o.val}" ${index === 0 ? 'checked' : ''}>
             <label for="${o.id}">${o.label}</label>
         `).join('');
     }
 
-    // Initialiseer opties bij laden
     updateLaadpaalOpties();
 
     function changeStep(current, next) {
@@ -6518,35 +6548,36 @@
             });
             if (!valid) return;
         }
-
+        
         document.getElementById('step' + current).classList.remove('active');
         document.getElementById('step' + next).classList.add('active');
-
+        
         document.querySelectorAll('.nrt-progress-step').forEach((step, index) => {
-            if (index < next) {
-                step.classList.add('active');
-            } else {
-                step.classList.remove('active');
-            }
+            step.classList.toggle('active', index < next);
         });
+
+        // AANGEPAST: Scrollt alleen naar het begin van het formulier i.p.v. de hele pagina
+        document.getElementById('nrtFormTop').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function toggleGraaf(show) {
         const box = document.getElementById('graafafstand_box');
         const input = document.getElementById('graaf_afstand');
-        if (show) {
-            box.style.display = 'block';
-            input.setAttribute('required', 'required');
-        } else {
-            box.style.display = 'none';
-            input.removeAttribute('required');
-            input.value = '';
+        box.style.display = show ? 'block' : 'none';
+        if(show) input.setAttribute('required', 'required'); else input.removeAttribute('required');
+    }
+
+    function updateFileText(id) {
+        const input = document.getElementById(id);
+        const text = document.getElementById(id + '-text');
+        if(input.files.length > 0) {
+            text.innerHTML = `<b>${input.files.length} bestand(en) geselecteerd</b>`;
         }
     }
 
     document.getElementById('nrtOfferteForm').onsubmit = function(e) {
         e.preventDefault();
-        alert('Bedankt! Uw aanvraag is verzonden naar NRT Elektroservice.');
+        alert('Bedankt! Uw offerteaanvraag is verzonden naar NRT Elektroservice.');
     };
 </script>
                     <!-- <div class="elementor-element elementor-element-1e67581 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
