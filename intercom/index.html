@@ -5891,12 +5891,132 @@
     }
 </style>
 
+<style>
+    /* --- 1. ALGEMENE STIJLEN & DESKTOP --- */
+    
+    /* Zorgt dat padding de breedte niet groter maakt dan 100% */
+    .nrt-form-wrapper, .nrt-grid-container, .nrt-grid-container * {
+        box-sizing: border-box; 
+    }
+
+    /* Basis grid layout */
+    .nrt-grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Twee gelijke kolommen */
+        gap: 20px; /* Ruimte tussen de velden */
+        width: 100%;
+    }
+
+    /* Items die over de hele breedte moeten */
+    .nrt-full-width {
+        grid-column: span 2;
+    }
+
+    /* Label styling */
+    .nrt-grid-container label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    /* Input velden styling */
+    .nrt-grid-container input:not([type="submit"]),
+    .nrt-grid-container select,
+    .nrt-grid-container textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc; /* De dunne lijn */
+        border-radius: 4px;
+        font-size: 16px; /* Voorkomt inzoomen op iPhone */
+        background-color: #fff;
+    }
+
+    /* Styling voor de upload box */
+    .nrt-custom-upload {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        background: #f9f9f9;
+        border-radius: 5px;
+    }
+    
+    /* Submit knop styling */
+    .nrt-submit-btn {
+        width: 100%;
+        margin-top: 20px;
+        cursor: pointer;
+        padding: 12px;
+        background-color: #333; /* Pas kleur aan indien nodig */
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* --- 2. MOBIEL / TABLET AANPASSINGEN --- */
+    @media only screen and (max-width: 768px) {
+        
+        /* Zet het grid om naar 1 kolom */
+        .nrt-grid-container {
+            grid-template-columns: 1fr; 
+            gap: 15px; 
+            padding-bottom: 20px;
+        }
+
+        /* Reset de full-width items naar 1 kolom */
+        .nrt-full-width {
+            grid-column: span 1; 
+        }
+        
+        /* --- AANPASSING VOOR LIJNEN TOT DE RAND --- */
+        
+        /* Padding voor de titel en intro tekst (zodat tekst NIET de rand raakt) */
+        .elementor-widget-container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        /* Padding voor de labels boven de velden */
+        .nrt-grid-container label {
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-bottom: 5px;
+        }
+        
+        /* De input velden raken WEL de rand (geen zij-padding/borders) */
+        .nrt-grid-container input:not([type="submit"]),
+        .nrt-grid-container select,
+        .nrt-grid-container textarea {
+             border-radius: 0; 
+             border-left: none; 
+             border-right: none; 
+        }
+
+        /* Upload box, knop en footer iconen moeten wel van de rand af blijven */
+        .nrt-custom-upload, 
+        .nrt-submit-btn, 
+        .nrt-full-width label[for="your-message"],
+        .nrt-form-footer {
+             margin-left: 20px !important;
+             margin-right: 20px !important;
+             width: auto !important;
+        }
+        
+        /* Titel grootte mobiel */
+        .elementor-widget-container h6 {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    }
+</style>
 <div class="elementor-element elementor-element-d66ad2e e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child nrt-form-wrapper" id="Offerte-Container">
     <div class="elementor-element elementor-element-0d71bcf e-con-full e-flex e-con e-child" id="Offerte">
         
         <div class="elementor-widget-container">
-            <h6 class="elementor-heading-title elementor-size-default">Intercom installatie offerte</h6>
-            <p style="margin-top: 10px; margin-bottom: 0px; color: #666;">Vul het onderstaande formulier in om een vrijblijvende offerte te ontvangen.</p>
+            <h6 class="elementor-heading-title elementor-size-default" style="font-family: sans-serif; color: #002D62;">Intercom installatie offerte</h6>
+            <p style="margin-top: 10px; margin-bottom: 20px; color: #666; font-family: sans-serif; line-height: 1.5;">Vul het onderstaande formulier in om een vrijblijvende offerte te ontvangen.</p>
         </div>
 
         <form action="/intercom/#wpcf7-f4282-p3673-o1" method="post" class="wpcf7-form init" enctype="multipart/form-data">
@@ -5974,7 +6094,7 @@
 
             <input type="submit" value="Aanvragen" class="wpcf7-form-control wpcf7-submit nrt-submit-btn" />
 
-            <div style="margin-top: 25px; display: flex; gap: 20px; flex-wrap: wrap;">
+            <div class="nrt-form-footer" style="margin-top: 25px; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 30px;">
                 <span style="display: flex; align-items: center; font-size: 0.9rem; color: #555;">
                     <i class="fas fa-check-circle" style="color: #25D366; margin-right: 8px;"></i> Persoonlijk contact
                 </span>
