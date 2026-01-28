@@ -5840,12 +5840,130 @@
     }
 </style>
 
+<style>
+    /* --- 1. ALGEMENE STIJLEN & DESKTOP --- */
+    
+    /* Zorgt dat padding de breedte niet groter maakt dan 100% */
+    .nrt-form-wrapper, .nrt-grid-container, .nrt-grid-container * {
+        box-sizing: border-box; 
+    }
+
+    /* Basis grid layout */
+    .nrt-grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Twee gelijke kolommen */
+        gap: 20px; /* Ruimte tussen de velden */
+        width: 100%;
+    }
+
+    /* Items die over de hele breedte moeten */
+    .nrt-full-width {
+        grid-column: span 2;
+    }
+
+    /* Label styling */
+    .nrt-grid-container label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    /* Input velden styling */
+    .nrt-grid-container input:not([type="submit"]),
+    .nrt-grid-container select,
+    .nrt-grid-container textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc; /* De dunne lijn */
+        border-radius: 4px;
+        font-size: 16px; /* Voorkomt inzoomen op iPhone */
+        background-color: #fff;
+    }
+
+    /* Styling voor de upload box */
+    .nrt-custom-upload {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        background: #f9f9f9;
+        border-radius: 5px;
+    }
+    
+    /* Submit knop styling */
+    .nrt-submit-btn {
+        width: 100%;
+        margin-top: 20px;
+        cursor: pointer;
+        padding: 12px;
+        background-color: #333; /* Voorbeeld kleur */
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* --- 2. MOBIEL / TABLET AANPASSINGEN --- */
+    @media only screen and (max-width: 768px) {
+        
+        /* Zet het grid om naar 1 kolom */
+        .nrt-grid-container {
+            grid-template-columns: 1fr; 
+            gap: 15px; 
+            padding-bottom: 20px; /* Wat ruimte onder het formulier */
+        }
+
+        /* Reset de full-width items naar 1 kolom */
+        .nrt-full-width {
+            grid-column: span 1; 
+        }
+        
+        /* --- HIER ZIT DE AANPASSING VOOR DE LIJN --- */
+        /* We voegen padding toe aan de tekst en labels, NIET aan de container */
+        
+        /* Padding voor de titel en intro tekst */
+        .elementor-widget-container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        /* Padding voor de labels boven de velden */
+        .nrt-grid-container label {
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-bottom: 5px;
+        }
+        
+        /* De input velden zelf krijgen GEEN zij-padding, waardoor de lijn de rand raakt */
+        .nrt-grid-container input:not([type="submit"]),
+        .nrt-grid-container select,
+        .nrt-grid-container textarea {
+             border-radius: 0; /* Optioneel: op mobiel zijn rechte hoeken vaak strakker als ze de rand raken */
+             border-left: none; /* Optioneel: haal linker rand weg voor een "full-bleed" effect */
+             border-right: none; /* Optioneel: haal rechter rand weg */
+        }
+
+        /* Upload box en knop ook aanpassen */
+        .nrt-custom-upload, .nrt-submit-btn, .nrt-full-width label[for="your-message"] {
+             margin-left: 20px;
+             margin-right: 20px;
+             width: auto; /* Zorgt dat ze de margin respecteren */
+        }
+        
+        /* Iets kleinere titel op mobiel */
+        .elementor-widget-container h6 {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    }
+</style>
 <div class="elementor-element elementor-element-818da4c e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child nrt-form-wrapper" id="Offerte">
     <div class="elementor-element elementor-element-5f0271c e-con-full e-flex e-con e-child">
         
         <div class="elementor-widget-container">
-            <h6 class="elementor-heading-title elementor-size-default">Verlichting installatie offerte</h6>
-            <p style="margin-top: 10px; margin-bottom: 0px; color: #666;">Vul het onderstaande formulier in om een vrijblijvende offerte te ontvangen.</p>
+            <h6 class="elementor-heading-title elementor-size-default" style="font-family: sans-serif; color: #002D62;">Verlichting installatie offerte</h6>
+            <p style="margin-top: 10px; margin-bottom: 20px; color: #666; font-family: sans-serif; line-height: 1.5;">Vul het onderstaande formulier in om een vrijblijvende offerte te ontvangen.</p>
         </div>
 
         <form action="/verlichting-installaties/#wpcf7-f3213-p2945-o1" method="post" class="wpcf7-form init" enctype="multipart/form-data">
@@ -5913,16 +6031,16 @@
                 </div>
 
                 <div class="nrt-full-width">
-                    <label>Heeft u nog opmerkingen of aanvullende informatie?</label>
+                    <label for="your-message">Heeft u nog opmerkingen of aanvullende informatie?</label>
                     <span class="wpcf7-form-control-wrap" data-name="your-message">
-                        <textarea name="your-message" class="wpcf7-form-control wpcf7-textarea" rows="2"></textarea>
+                        <textarea name="your-message" id="your-message" class="wpcf7-form-control wpcf7-textarea" rows="4"></textarea>
                     </span>
                 </div>
             </div>
 
             <input type="submit" value="Aanvragen" class="wpcf7-form-control wpcf7-submit nrt-submit-btn" />
 
-            <div style="margin-top: 25px; display: flex; gap: 20px; flex-wrap: wrap;">
+            <div style="margin-top: 25px; display: flex; gap: 20px; flex-wrap: wrap; padding-left: 20px; padding-right: 20px; padding-bottom: 30px;">
                 <span style="display: flex; align-items: center; font-size: 0.9rem; color: #555;">
                     <i class="fas fa-check-circle" style="color: #25D366; margin-right: 8px;"></i> Persoonlijk contact
                 </span>
