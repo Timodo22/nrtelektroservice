@@ -5861,7 +5861,7 @@
     .nrt-custom-upload p { margin: 0; font-size: 0.95rem; color: #666; }
     .nrt-custom-upload b { color: var(--nrt-red); }
 
-    /* De knop (Huisstijl Rood) - AANGEPAST: max-width toegevoegd */
+    /* De knop (Huisstijl Rood) */
     .nrt-submit-btn {
         width: 100% !important;
         max-width: 90%; 
@@ -5883,10 +5883,28 @@
         background-color: #c70511 !important;
         transform: translateY(-2px);
     }
+    
+    .nrt-submit-btn:disabled {
+        background-color: #999 !important;
+        cursor: not-allowed !important;
+        box-shadow: none !important;
+    }
+
+    /* Status meldingen styling (TOEGEVOEGD voor correcte werking script) */
+    #nrt-form-status {
+        max-width: 90%;
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        display: none;
+        font-weight: 600;
+    }
+    .nrt-status-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .nrt-status-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
     /* Mobiele weergave */
     @media (max-width: 600px) {
-        .nrt-grid-container, .nrt-submit-btn { max-width: 100%; }
+        .nrt-grid-container, .nrt-submit-btn, #nrt-form-status { max-width: 100%; }
         .nrt-full-width { grid-column: span 1; }
     }
 </style>
@@ -5894,7 +5912,6 @@
 <style>
     /* --- 1. ALGEMENE STIJLEN & DESKTOP --- */
     
-    /* Zorgt dat padding de breedte niet groter maakt dan 100% */
     .nrt-form-wrapper, .nrt-grid-container, .nrt-grid-container * {
         box-sizing: border-box; 
     }
@@ -5940,20 +5957,6 @@
         background: #f9f9f9;
         border-radius: 5px;
     }
-    
-    /* Submit knop styling */
-    .nrt-submit-btn {
-        width: 100%;
-        margin-top: 20px;
-        cursor: pointer;
-        padding: 12px;
-        background-color: #333; /* Pas kleur aan indien nodig */
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        font-size: 18px;
-        font-weight: bold;
-    }
 
     /* --- 2. MOBIEL / TABLET AANPASSINGEN --- */
     @media only screen and (max-width: 768px) {
@@ -5998,7 +6001,8 @@
         .nrt-custom-upload, 
         .nrt-submit-btn, 
         .nrt-full-width label[for="your-message"],
-        .nrt-form-footer {
+        .nrt-form-footer,
+        #nrt-form-status {
              margin-left: 20px !important;
              margin-right: 20px !important;
              width: auto !important;
@@ -6011,6 +6015,7 @@
         }
     }
 </style>
+
 <div class="elementor-element elementor-element-d66ad2e e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child nrt-form-wrapper" id="Offerte-Container">
     <div class="elementor-element elementor-element-0d71bcf e-con-full e-flex e-con e-child" id="Offerte">
         
@@ -6019,13 +6024,9 @@
             <p style="margin-top: 10px; margin-bottom: 20px; color: #666; font-family: sans-serif; line-height: 1.5;">Vul het onderstaande formulier in om een vrijblijvende offerte te ontvangen.</p>
         </div>
 
-        <form action="/intercom/#wpcf7-f4282-p3673-o1" method="post" class="wpcf7-form init" enctype="multipart/form-data">
-            <div style="display: none;">
-                <input name="_wpcf7" type="hidden" value="4282" />
-                <input name="_wpcf7_version" type="hidden" value="6.1.3" />
-                <input name="_wpcf7_unit_tag" type="hidden" value="wpcf7-f4282-p3673-o1" />
-                <input name="_wpcf7_container_post" type="hidden" value="3673" />
-            </div>
+        <form id="nrt-offerte-form" class="wpcf7-form init" enctype="multipart/form-data">
+            
+            <input type="hidden" name="form_category" value="Intercom installatie">
 
             <div class="nrt-grid-container">
                 <div>
@@ -6092,7 +6093,9 @@
                 </div>
             </div>
 
-            <input type="submit" value="Aanvragen" class="wpcf7-form-control wpcf7-submit nrt-submit-btn" />
+            <div id="nrt-form-status"></div>
+
+            <input type="submit" value="Aanvragen" class="wpcf7-form-control wpcf7-submit nrt-submit-btn" id="nrt-submit-btn" />
 
             <div class="nrt-form-footer" style="margin-top: 25px; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 30px;">
                 <span style="display: flex; align-items: center; font-size: 0.9rem; color: #555;">
@@ -6105,6 +6108,99 @@
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- API CONFIGURATIE ---
+    const API_URL = "https://nrtapi.timosteen22.workers.dev/"; 
+    const form = document.getElementById('nrt-offerte-form');
+    const statusDiv = document.getElementById('nrt-form-status');
+    const submitBtn = document.getElementById('nrt-submit-btn');
+
+    // Helper functie: Bestand naar Base64 converteren
+    const fileToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.toString().replace(/^data:(.*,)?/, ''));
+            reader.onerror = error => reject(error);
+        });
+    };
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault(); 
+
+        // 1. UI Update (Laden...)
+        submitBtn.value = "Bezig met verzenden...";
+        submitBtn.disabled = true;
+        statusDiv.style.display = 'none';
+
+        try {
+            // 2. Data verzamelen
+            const formData = new FormData(form);
+            const payload = {
+                category: formData.get('form_category'), // Pakt de waarde: Intercom installatie
+                firstname: formData.get('firstname'),
+                lastname: formData.get('lastname'),
+                email: formData.get('your-email'),
+                phone: formData.get('your-phone'),
+                zipcode: formData.get('postcode'),
+                houseNumber: formData.get('huisnummer'),
+                city: formData.get('stad'),
+                message: formData.get('your-message'),
+                attachments: []
+            };
+
+            // 3. Bestanden verwerken
+            const fileInput = form.querySelector('input[name="file-631"]');
+            if (fileInput && fileInput.files.length > 0) {
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    const file = fileInput.files[i];
+                    const base64Content = await fileToBase64(file);
+                    payload.attachments.push({
+                        filename: file.name,
+                        content: base64Content
+                    });
+                }
+            }
+
+            // 4. Versturen naar de API
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                // 5. Succes afhandeling
+                statusDiv.innerText = "Bedankt! Uw aanvraag is succesvol verzonden. Wij nemen spoedig contact op.";
+                statusDiv.className = "nrt-status-success";
+                statusDiv.style.display = "block";
+                form.reset(); 
+                
+                // Reset de upload tekst
+                const uploadText = document.querySelector('.nrt-custom-upload p');
+                if(uploadText) uploadText.innerHTML = "Verslepen en neerzetten (of) <b>kies bestanden</b>";
+                
+            } else {
+                throw new Error('Server Error');
+            }
+
+        } catch (error) {
+            // 6. Fout afhandeling
+            console.error('Fout bij verzenden:', error);
+            statusDiv.innerText = "Er is iets misgegaan bij het verzenden. Probeer het later opnieuw.";
+            statusDiv.className = "nrt-status-error";
+            statusDiv.style.display = "block";
+        } finally {
+            // Reset knop
+            submitBtn.value = "Aanvragen";
+            submitBtn.disabled = false;
+        }
+    });
+});
+</script>
                 <div class="elementor-element elementor-element-9d67c7e e-con-full elementor-hidden-tablet elementor-hidden-mobile e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
                     data-element_type="container" data-id="9d67c7e">
                     <div class="elementor-element elementor-element-b658577 e-con-full wpr-sticky-section-yes elementor-hidden-tablet e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no elementor-invisible e-con e-child"
