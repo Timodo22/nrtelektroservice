@@ -5984,6 +5984,8 @@
 
         <form id="nrt-offerte-form" class="wpcf7-form init" enctype="multipart/form-data">
             
+            <input type="hidden" name="form_category" value="Verlichting installatie">
+
             <div class="nrt-grid-container">
                 <div>
                     <label>Voornaam *</label>
@@ -6068,36 +6070,24 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
-    // --- CONFIGURATIE ---
-    // PLAK HIER DE URL VAN JE CLOUDFLARE WORKER NA DEPLOYMENT
+    // --- NIEUWE CONFIGURATIE MET CATEGORIE ONDERSTEUNING ---
     const API_URL = "https://nrtapi.timosteen22.workers.dev/"; 
-
     const form = document.getElementById('nrt-offerte-form');
     const statusDiv = document.getElementById('nrt-form-status');
     const submitBtn = document.getElementById('nrt-submit-btn');
 
-    // Helper functie: Bestand naar Base64 converteren (voor de API)
+    // Helper functie: Bestand naar Base64 converteren
     const fileToBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
-            reader.onload = () => {
-                // Verwijder de "data:image/png;base64," prefix, Resend API wil vaak raw base64
-                // Echter, jouw API code stuurt 'data.attachments' direct door. 
-                // Resend verwacht: { filename: "x", content: "base64..." }
-                // We sturen de pure base64 string (deel na de komma)
-                let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
-                if ((encoded.length % 4) > 0) {
-                    encoded += '='.repeat(4 - (encoded.length % 4));
-                }
-                resolve(encoded);
-            };
+            reader.onload = () => resolve(reader.result.toString().replace(/^data:(.*,)?/, ''));
             reader.onerror = error => reject(error);
         });
     };
 
     form.addEventListener('submit', async function(e) {
-        e.preventDefault(); // Voorkomt standaard Wordpress verzending
+        e.preventDefault(); 
 
         // 1. UI Update (Laden...)
         submitBtn.value = "Bezig met verzenden...";
@@ -6105,9 +6095,10 @@ document.addEventListener('DOMContentLoaded', function() {
         statusDiv.style.display = 'none';
 
         try {
-            // 2. Data verzamelen uit de velden
+            // 2. Data verzamelen (Inclusief nieuwe categorie)
             const formData = new FormData(form);
             const payload = {
+                category: formData.get('form_category'), // Pakt de verborgen waarde
                 firstname: formData.get('firstname'),
                 lastname: formData.get('lastname'),
                 email: formData.get('your-email'),
@@ -6115,29 +6106,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 zipcode: formData.get('postcode'),
                 houseNumber: formData.get('huisnummer'),
                 city: formData.get('stad'),
-                address: formData.get('stad'), // Let op: Formulier heeft geen Straatnaam veld, dus we gebruiken Stad of laten leeg
                 message: formData.get('your-message'),
                 attachments: []
             };
 
-            // 3. Bestanden verwerken (indien aanwezig)
+            // 3. Bestanden verwerken (Nieuwe loop logica)
             const fileInput = form.querySelector('input[name="file-631"]');
             if (fileInput && fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const base64Content = await fileToBase64(file);
-                
-                payload.attachments.push({
-                    filename: file.name,
-                    content: base64Content
-                });
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    const file = fileInput.files[i];
+                    const base64Content = await fileToBase64(file);
+                    payload.attachments.push({
+                        filename: file.name,
+                        content: base64Content
+                    });
+                }
             }
 
             // 4. Versturen naar de API
             const response = await fetch(API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
 
@@ -6147,16 +6136,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 statusDiv.className = "nrt-status-success";
                 statusDiv.style.display = "block";
                 form.reset(); // Formulier leegmaken
-                document.querySelector('.nrt-custom-upload p').innerHTML = "Verslepen en neerzetten (of) <b>kies bestanden</b>";
+                
+                // Reset de upload tekst
+                const uploadText = document.querySelector('.nrt-custom-upload p');
+                if(uploadText) uploadText.innerHTML = "Verslepen en neerzetten (of) <b>kies bestanden</b>";
+                
             } else {
-                // Server gaf een error
-                throw new Error('Server reageerde niet correct');
+                throw new Error('Server Error');
             }
 
         } catch (error) {
             // 6. Fout afhandeling
             console.error('Fout bij verzenden:', error);
-            statusDiv.innerText = "Er is iets misgegaan bij het verzenden. Probeer het later opnieuw of bel ons direct.";
+            statusDiv.innerText = "Er is iets misgegaan bij het verzenden. Probeer het later opnieuw.";
             statusDiv.className = "nrt-status-error";
             statusDiv.style.display = "block";
         } finally {
