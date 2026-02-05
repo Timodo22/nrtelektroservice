@@ -6240,168 +6240,201 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </div>
-        <div class="elementor-element elementor-element-c0250ba e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-parent"
-            data-element_type="container" data-id="c0250ba" data-settings='{"background_background":"classic"}'>
-            <div class="e-con-inner">
-                <div class="elementor-element elementor-element-07a1f68 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                    data-element_type="container" data-id="07a1f68">
-                    <div class="elementor-element elementor-element-bef6ecf elementor-widget elementor-widget-heading"
-                        data-element_type="widget" data-id="bef6ecf" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h6 class="elementor-heading-title elementor-size-default">Eerder werk</h6>
-                        </div>
+        <style>
+    /* --- DIAGNOSE & GROEPENKAST SECTIE STYLING --- */
+    .nrt-diagnose-section {
+        padding: 80px 20px;
+        background-color: #fafafa;
+        font-family: 'Rubik', sans-serif;
+    }
+
+    .nrt-diagnose-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .nrt-diagnose-header h6 {
+        color: #cb4154; 
+        font-size: 17px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .nrt-diagnose-header h2 {
+        color: #131d3b; 
+        font-size: 38px;
+        font-weight: 700;
+    }
+
+    .nrt-diagnose-container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+
+    /* TABS NAVIGATIE */
+    .nrt-diagnose-nav {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .nrt-diagnose-btn {
+        background: none;
+        border: none;
+        padding: 15px 10px;
+        font-family: 'Rubik', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #888888;
+        cursor: pointer;
+        position: relative;
+        transition: 0.3s;
+        text-transform: uppercase;
+    }
+
+    .nrt-diagnose-btn:hover {
+        color: #131d3b;
+    }
+
+    .nrt-diagnose-btn:after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #cb4154;
+        transition: 0.3s ease;
+    }
+
+    .nrt-diagnose-btn.is-active {
+        color: #131d3b;
+        font-weight: 700;
+    }
+
+    .nrt-diagnose-btn.is-active:after {
+        width: 100%;
+    }
+
+    /* CONTENT LAYOUT */
+    .nrt-diagnose-panel {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        animation: nrtFadeInDiagnose 0.5s ease forwards;
+    }
+
+    .nrt-diagnose-panel.is-active {
+        display: grid;
+    }
+
+    .nrt-diagnose-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .nrt-diagnose-info h6 {
+        color: #131d3b;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
+
+    .nrt-diagnose-info p {
+        color: #171717;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .nrt-diagnose-testimonial {
+        border-left: 4px solid #cb4154;
+        padding-left: 20px;
+        font-style: italic;
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+    @keyframes nrtFadeInDiagnose {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .nrt-diagnose-panel { grid-template-columns: 1fr; }
+        .nrt-diagnose-header h2 { font-size: 28px; }
+        .nrt-diagnose-nav { flex-wrap: wrap; gap: 10px; }
+    }
+</style>
+
+<section class="nrt-diagnose-section">
+    <div class="nrt-diagnose-header">
+        <h6>Eerder werk</h6>
+        <h2>Bekijk onze projecten</h2>
+    </div>
+
+    <div class="nrt-diagnose-container">
+        <div class="nrt-diagnose-nav">
+            <button class="nrt-diagnose-btn is-active" data-target="diag1">Project 1</button>
+            <button class="nrt-diagnose-btn" data-target="diag2">Project 2</button>
+        </div>
+
+        <div class="nrt-diagnose-content">
+            <div class="nrt-diagnose-panel is-active" id="diag1">
+                <div class="nrt-diagnose-image">
+                    <img src="../wp-content/uploads/2025/08/male-electrician-works-switchboard-with-electrical-connecting-cable-1024x683.jpg" alt="Diagnose elektrische systemen Eindhoven">
+                </div>
+                <div class="nrt-diagnose-info">
+                    <h6>Diagnose van elektrische systemen in residentieel vastgoed</h6>
+                    <p>Bij dit project in Eindhoven voerde NRT een uitgebreide diagnose uit van de elektrische systemen in een woning. Dankzij een snelle reactie en vakkundige aanpak konden de problemen in de groepenkast en bekabeling direct worden opgespoord en opgelost.</p>
+                    <div class="nrt-diagnose-testimonial">
+                        “Snelle reactie en snel geholpen. De monteur legde alles duidelijk uit en zorgde ervoor dat het probleem direct werd opgelost. Wij voelden ons meteen in goede handen.” — Eigenaar woning, Eindhoven
                     </div>
-                    <div class="elementor-element elementor-element-a929062 elementor-widget elementor-widget-heading"
-                        data-element_type="widget" data-id="a929062" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h2 class="elementor-heading-title elementor-size-default">Bekijk onze projecten</h2>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-6b5976f e-n-tabs-none elementor-widget elementor-widget-n-tabs"
-                        data-element_type="widget" data-id="6b5976f"
-                        data-settings='{"tabs_justify_horizontal":"center","tabs_justify_horizontal_mobile":"center","horizontal_scroll":"disable"}'
-                        data-widget_type="nested-tabs.default">
-                        <div class="elementor-widget-container">
-                            <div aria-label="Tabs. Open items met enter of spatie, sluit af met escape en navigeer met de pijltoetsen."
-                                class="e-n-tabs" data-widget-number="112564079">
-                                <div class="e-n-tabs-heading" role="tablist">
-                                    <button aria-controls="e-n-tab-content-1125640791" aria-selected="true"
-                                        class="e-n-tab-title" data-tab-index="1" id="e-n-tab-title-1125640791"
-                                        role="tab" style="--n-tabs-title-order: 1;" tabindex="0">
-                                        <span class="e-n-tab-title-text">
-                                            Project 1 </span>
-                                    </button>
-                                    <button aria-controls="e-n-tab-content-1125640792" aria-selected="false"
-                                        class="e-n-tab-title" data-tab-index="2" id="e-n-tab-title-1125640792"
-                                        role="tab" style="--n-tabs-title-order: 2;" tabindex="-1">
-                                        <span class="e-n-tab-title-text">
-                                            Project 2 </span>
-                                    </button>
-                                </div>
-                                <div class="e-n-tabs-content">
-                                    <div aria-labelledby="e-n-tab-title-1125640791"
-                                        class="e-active elementor-element elementor-element-ab0bd6d e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                        data-element_type="container" data-id="ab0bd6d" data-tab-index="1"
-                                        id="e-n-tab-content-1125640791" role="tabpanel"
-                                        style="--n-tabs-title-order: 1;">
-                                        <div class="elementor-element elementor-element-d1e2202 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="d1e2202">
-                                            <div class="elementor-element elementor-element-104904d elementor-widget elementor-widget-image"
-                                                data-element_type="widget" data-id="104904d"
-                                                data-widget_type="image.default">
-                                                <div class="elementor-widget-container">
-                                                    <img alt="Elektrische installatie woningbouw Eindhoven diagnose en herstel"
-                                                        class="attachment-large size-large wp-image-4086"
-                                                        decoding="async" height="683"
-                                                        sizes="(max-width: 1024px) 100vw, 1024px"
-                                                        src="../wp-content/uploads/2025/08/male-electrician-works-switchboard-with-electrical-connecting-cable-1024x683.jpg"
-                                                        srcset="https://nrtelektroservice.nl/wp-content/uploads/2025/08/male-electrician-works-switchboard-with-electrical-connecting-cable-1024x683.jpg 1024w, https://nrtelektroservice.nl/wp-content/uploads/2025/08/male-electrician-works-switchboard-with-electrical-connecting-cable-300x200.jpg 300w, https://nrtelektroservice.nl/wp-content/uploads/2025/08/male-electrician-works-switchboard-with-electrical-connecting-cable-768x512.jpg 768w, https://nrtelektroservice.nl/wp-content/uploads/2025/08/male-electrician-works-switchboard-with-electrical-connecting-cable-1536x1024.jpg 1536w, https://nrtelektroservice.nl/wp-content/uploads/2025/08/male-electrician-works-switchboard-with-electrical-connecting-cable-2048x1365.jpg 2048w"
-                                                        width="1024"> </img>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-da8f423 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="da8f423">
-                                            <div class="elementor-element elementor-element-5f452f2 elementor-widget elementor-widget-heading"
-                                                data-element_type="widget" data-id="5f452f2"
-                                                data-widget_type="heading.default">
-                                                <div class="elementor-widget-container">
-                                                    <h6 class="elementor-heading-title elementor-size-default">Diagnose
-                                                        van elektrische systemen in residentieel vastgoed</h6>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-3799fb6 elementor-widget elementor-widget-text-editor"
-                                                data-element_type="widget" data-id="3799fb6"
-                                                data-widget_type="text-editor.default">
-                                                <div class="elementor-widget-container">
-                                                    <p>Bij dit project in Eindhoven voerde NRT een uitgebreide diagnose
-                                                        uit van de elektrische systemen in een woning. Dankzij een
-                                                        snelle reactie en vakkundige aanpak konden de problemen in de
-                                                        groepenkast en bekabeling direct worden opgespoord en opgelost.
-                                                        De klant werd volledig ontzorgd: van het controleren van de
-                                                        installatie tot het geven van advies om toekomstige storingen te
-                                                        voorkomen.</p>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-453f0c5 elementor-widget elementor-widget-testimonial"
-                                                data-element_type="widget" data-id="453f0c5"
-                                                data-widget_type="testimonial.default">
-                                                <div class="elementor-widget-container">
-                                                    <div class="elementor-testimonial-wrapper">
-                                                        <div class="elementor-testimonial-content">“Snelle reactie en
-                                                            snel geholpen. De monteur legde alles duidelijk uit en
-                                                            zorgde ervoor dat het probleem direct werd opgelost. Wij
-                                                            voelden ons meteen in goede handen.” — Eigenaar woning, Eindhoven</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div aria-labelledby="e-n-tab-title-1125640792"
-                                        class="elementor-element elementor-element-5ec0c85 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                        data-element_type="container" data-id="5ec0c85" data-tab-index="2"
-                                        id="e-n-tab-content-1125640792" role="tabpanel"
-                                        style="--n-tabs-title-order: 2;">
-                                        <div class="elementor-element elementor-element-2904806 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="2904806">
-                                            <div class="elementor-element elementor-element-e6e6192 elementor-widget elementor-widget-image"
-                                                data-element_type="widget" data-id="e6e6192"
-                                                data-widget_type="image.default">
-                                                <div class="elementor-widget-container">
-                                                    <img alt="Elektrische installatie woningbouw Eindhoven met meterkastaanpassing"
-                                                        decoding="async" loading="lazy"
-                                                        src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-09-03-at-17.16.43-e1756913825820-rb7wbboeqsqzuwca6s9hu0c9og2j88er0odls6h4so.jpeg"
-                                                        title="Meterkastaanpassing woningbouw Eindhoven" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-483bbd0 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="483bbd0">
-                                            <div class="elementor-element elementor-element-74bc08f elementor-widget elementor-widget-heading"
-                                                data-element_type="widget" data-id="74bc08f"
-                                                data-widget_type="heading.default">
-                                                <div class="elementor-widget-container">
-                                                    <h6 class="elementor-heading-title elementor-size-default">
-                                                        Groepenkastaanpassing in bedrijfspand</h6>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-2503f39 elementor-widget elementor-widget-text-editor"
-                                                data-element_type="widget" data-id="2503f39"
-                                                data-widget_type="text-editor.default">
-                                                <div class="elementor-widget-container">
-                                                    <p>Voor dit bedrijfspand heeft NRT zowel de groepenkast aangepast
-                                                        als de volledige verlichting verzorgd. Hierbij is gekozen voor
-                                                        een mix van wandlampen en stijlvolle hangarmaturen die zorgen
-                                                        voor zowel functionele werkverlichting als een representatieve
-                                                        uitstraling. Dankzij de vernieuwing is de elektrische
-                                                        installatie toekomstbestendig gemaakt en voldoet deze weer aan
-                                                        de huidige normen. De verlichting is energiezuinig, slim
-                                                        geschakeld en volledig afgestemd op de wensen van de klant.
-                                                        Alles is netjes gemonteerd en afgewerkt met oog voor veiligheid,
-                                                        comfort en sfeer.</p>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-db21f51 elementor-widget elementor-widget-testimonial"
-                                                data-element_type="widget" data-id="db21f51"
-                                                data-widget_type="testimonial.default">
-                                                <div class="elementor-widget-container">
-                                                    <div class="elementor-testimonial-wrapper">
-                                                        <div class="elementor-testimonial-content">“We zochten een
-                                                            partner die niet alleen de technische installatie, maar ook
-                                                            de uitstraling kon verbeteren. NRT leverde precies wat we
-                                                            nodig hadden.” — Eigenaar bedrijfspand</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+
+            <div class="nrt-diagnose-panel" id="diag2">
+                <div class="nrt-diagnose-image">
+                    <img src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-09-03-at-17.16.43-e1756913825820-rb7wbboeqsqzuwca6s9hu0c9og2j88er0odls6h4so.jpeg" alt="Groepenkastaanpassing bedrijfspand">
+                </div>
+                <div class="nrt-diagnose-info">
+                    <h6>Groepenkastaanpassing in bedrijfspand</h6>
+                    <p>Voor dit bedrijfspand heeft NRT zowel de groepenkast aangepast als de volledige verlichting verzorgd. Hierbij is gekozen voor een mix van functionele werkverlichting en representatieve uitstraling. De installatie is nu weer volledig toekomstbestendig en veilig.</p>
+                    <div class="nrt-diagnose-testimonial">
+                        “We zochten een partner die niet alleen de technische installatie, maar ook de uitstraling kon verbeteren. NRT leverde precies wat we nodig hadden.” — Eigenaar bedrijfspand
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const diagButtons = document.querySelectorAll('.nrt-diagnose-btn');
+        const diagPanels = document.querySelectorAll('.nrt-diagnose-panel');
+
+        diagButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+
+                // Update knoppen
+                diagButtons.forEach(b => b.classList.remove('is-active'));
+                this.classList.add('is-active');
+
+                // Update panels
+                diagPanels.forEach(p => p.classList.remove('is-active'));
+                document.getElementById(targetId).classList.add('is-active');
+            });
+        });
+    });
+</script>
         <div class="elementor-element elementor-element-1675748 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no elementor-invisible e-con e-parent"
             data-element_type="container" data-id="1675748"
             data-settings='{"background_background":"classic","animation":"fadeInUp"}'>

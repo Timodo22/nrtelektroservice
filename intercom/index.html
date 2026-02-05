@@ -6278,226 +6278,215 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </div>
-        <div class="elementor-element elementor-element-2c70fb6 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-parent"
-            data-element_type="container" data-id="2c70fb6" data-settings='{"background_background":"classic"}'>
-            <div class="e-con-inner">
-                <div class="elementor-element elementor-element-bdb053a e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                    data-element_type="container" data-id="bdb053a">
-                    <div class="elementor-element elementor-element-5a1a7f9 elementor-widget elementor-widget-heading"
-                        data-element_type="widget" data-id="5a1a7f9" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h6 class="elementor-heading-title elementor-size-default">Eerder werk</h6>
-                        </div>
+        <style>
+    /* We gebruiken unieke klassen voor deze sectie om conflicten te voorkomen indien nodig */
+    .nrt-intercom-section {
+        padding: 80px 20px;
+        background-color: #fafafa;
+        font-family: 'Rubik', sans-serif;
+    }
+
+    .nrt-intercom-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .nrt-intercom-header h6 {
+        color: #cb4154; 
+        font-size: 17px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .nrt-intercom-header h2 {
+        color: #131d3b; 
+        font-size: 38px;
+        font-weight: 700;
+    }
+
+    .nrt-intercom-container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+
+    /* TABS NAVIGATIE */
+    .nrt-intercom-nav {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .nrt-intercom-btn {
+        background: none;
+        border: none;
+        padding: 15px 10px;
+        font-family: 'Rubik', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #888888;
+        cursor: pointer;
+        position: relative;
+        transition: 0.3s;
+        text-transform: uppercase;
+    }
+
+    .nrt-intercom-btn:hover {
+        color: #131d3b;
+    }
+
+    .nrt-intercom-btn:after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #cb4154;
+        transition: 0.3s ease;
+    }
+
+    .nrt-intercom-btn.is-active {
+        color: #131d3b;
+        font-weight: 700;
+    }
+
+    .nrt-intercom-btn.is-active:after {
+        width: 100%;
+    }
+
+    /* CONTENT LAYOUT */
+    .nrt-intercom-panel {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        animation: nrtFadeInIntercom 0.5s ease forwards;
+    }
+
+    .nrt-intercom-panel.is-active {
+        display: grid;
+    }
+
+    .nrt-intercom-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .nrt-intercom-info h6 {
+        color: #131d3b;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
+
+    .nrt-intercom-info p {
+        color: #171717;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .nrt-intercom-testimonial {
+        border-left: 4px solid #cb4154;
+        padding-left: 20px;
+        font-style: italic;
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+    @keyframes nrtFadeInIntercom {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .nrt-intercom-panel { grid-template-columns: 1fr; }
+        .nrt-intercom-header h2 { font-size: 28px; }
+        .nrt-intercom-nav { flex-wrap: wrap; gap: 10px; }
+    }
+</style>
+
+<section class="nrt-intercom-section">
+    <div class="nrt-intercom-header">
+        <h6>Eerder werk</h6>
+        <h2>Bekijk onze projecten</h2>
+    </div>
+
+    <div class="nrt-intercom-container">
+        <div class="nrt-intercom-nav">
+            <button class="nrt-intercom-btn is-active" data-target="intercom1">Project 1</button>
+            <button class="nrt-intercom-btn" data-target="intercom2">Project 2</button>
+            <button class="nrt-intercom-btn" data-target="intercom3">Project 3</button>
+        </div>
+
+        <div class="nrt-intercom-content">
+            <div class="nrt-intercom-panel is-active" id="intercom1">
+                <div class="nrt-intercom-image">
+                    <img src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-09-03-at-17.04.08-1-scaled-rb7vu72a7hawap7y7dq8ebxvzohqysetzwf2ynve6g.jpeg" alt="Intercom installatie Eindhoven">
+                </div>
+                <div class="nrt-intercom-info">
+                    <h6>Nieuwe intercominstallatie met modern 2Voice-systeem</h6>
+                    <p>Onlangs hebben wij een complete intercominstallatie vervangen door een modern 2Voice-systeem van Urmet, inclusief een nieuwe buitenpost. Met dit systeem is de communicatie tussen bewoners en bezoekers een stuk duidelijker, gebruiksvriendelijker en veiliger geworden.</p>
+                    <div class="nrt-intercom-testimonial">
+                        “De nieuwe intercominstallatie is een enorme verbetering, gebruiksvriendelijk, strak gemonteerd en technisch perfect uitgevoerd.” — Tevreden klant
                     </div>
-                    <div class="elementor-element elementor-element-ccc82c5 elementor-widget elementor-widget-heading"
-                        data-element_type="widget" data-id="ccc82c5" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h2 class="elementor-heading-title elementor-size-default">Bekijk onze projecten</h2>
-                        </div>
+                </div>
+            </div>
+
+            <div class="nrt-intercom-panel" id="intercom2">
+                <div class="nrt-intercom-image">
+                    <img src="../wp-content/uploads/2025/09/WhatsApp-Image-2025-09-03-at-17.04.08-8-768x1024.jpeg" alt="RVS buitenpost intercom">
+                </div>
+                <div class="nrt-intercom-info">
+                    <h6>Nieuwe intercominstallatie met modern 2Voice-systeem</h6>
+                    <p>De installatie is volledig vernieuwd en professioneel afgewerkt met een hoogwaardige RVS buitenpost. Hierdoor kunnen de bewoners weer jarenlang rekenen op een betrouwbare en moderne oplossing die ook nog eens strak oogt bij de entree.</p>
+                    <div class="nrt-intercom-testimonial">
+                        “De nieuwe intercominstallatie is een enorme verbetering, gebruiksvriendelijk, strak gemonteerd en technisch perfect uitgevoerd.” — Tevreden klant
                     </div>
-                    <div class="elementor-element elementor-element-6c8097f e-n-tabs-none elementor-widget elementor-widget-n-tabs"
-                        data-element_type="widget" data-id="6c8097f"
-                        data-settings='{"tabs_justify_horizontal":"center","tabs_justify_horizontal_mobile":"center","horizontal_scroll":"disable"}'
-                        data-widget_type="nested-tabs.default">
-                        <div class="elementor-widget-container">
-                            <div aria-label="Tabs. Open items met enter of spatie, sluit af met escape en navigeer met de pijltoetsen."
-                                class="e-n-tabs" data-widget-number="113772927">
-                                <div class="e-n-tabs-heading" role="tablist">
-                                    <button aria-controls="e-n-tab-content-1137729271" aria-selected="true"
-                                        class="e-n-tab-title" data-tab-index="1" id="e-n-tab-title-1137729271"
-                                        role="tab" style="--n-tabs-title-order: 1;" tabindex="0">
-                                        <span class="e-n-tab-title-text">
-                                            Project 1 </span>
-                                    </button>
-                                    <button aria-controls="e-n-tab-content-1137729272" aria-selected="false"
-                                        class="e-n-tab-title" data-tab-index="2" id="e-n-tab-title-1137729272"
-                                        role="tab" style="--n-tabs-title-order: 2;" tabindex="-1">
-                                        <span class="e-n-tab-title-text">
-                                            Project 2 </span>
-                                    </button>
-                                    <button aria-controls="e-n-tab-content-1137729273" aria-selected="false"
-                                        class="e-n-tab-title" data-tab-index="3" id="e-n-tab-title-1137729273"
-                                        role="tab" style="--n-tabs-title-order: 3;" tabindex="-1">
-                                        <span class="e-n-tab-title-text">
-                                            Project 3 </span>
-                                    </button>
-                                </div>
-                                <div class="e-n-tabs-content">
-                                    <div aria-labelledby="e-n-tab-title-1137729271"
-                                        class="e-active elementor-element elementor-element-d1c4e2e e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                        data-element_type="container" data-id="d1c4e2e" data-tab-index="1"
-                                        id="e-n-tab-content-1137729271" role="tabpanel"
-                                        style="--n-tabs-title-order: 1;">
-                                        <div class="elementor-element elementor-element-604491b e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="604491b">
-                                            <div class="elementor-element elementor-element-ebe4eab elementor-widget elementor-widget-image"
-                                                data-element_type="widget" data-id="ebe4eab"
-                                                data-widget_type="image.default">
-                                                <div class="elementor-widget-container">
-                                                    <img alt="Intercom installatie Eindhoven in appartementencomplex met camera"
-                                                        decoding="async" loading="lazy"
-                                                        src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-09-03-at-17.04.08-1-scaled-rb7vu72a7hawap7y7dq8ebxvzohqysetzwf2ynve6g.jpeg"
-                                                        title="Intercom installatie Eindhoven appartementencomplex">
-                                                    </img>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-502a61b e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="502a61b">
-                                            <div class="elementor-element elementor-element-fc0d788 elementor-widget elementor-widget-heading"
-                                                data-element_type="widget" data-id="fc0d788"
-                                                data-widget_type="heading.default">
-                                                <div class="elementor-widget-container">
-                                                    <h6 class="elementor-heading-title elementor-size-default">Nieuwe
-                                                        intercominstallatie met modern 2Voice-systeem</h6>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-be22942 elementor-widget elementor-widget-text-editor"
-                                                data-element_type="widget" data-id="be22942"
-                                                data-widget_type="text-editor.default">
-                                                <div class="elementor-widget-container">
-                                                    <p>Onlangs hebben wij een complete intercominstallatie vervangen
-                                                        door een modern 2Voice-systeem van Urmet, inclusief een nieuwe
-                                                        buitenpost. Met dit systeem is de communicatie tussen bewoners
-                                                        en bezoekers een stuk duidelijker, gebruiksvriendelijker en
-                                                        veiliger geworden. De installatie is volledig vernieuwd en
-                                                        professioneel afgewerkt, zodat de bewoners weer jarenlang kunnen
-                                                        rekenen op een betrouwbare en moderne oplossing.</p>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-124d4ea elementor-widget elementor-widget-testimonial"
-                                                data-element_type="widget" data-id="124d4ea"
-                                                data-widget_type="testimonial.default">
-                                                <div class="elementor-widget-container">
-                                                    <div class="elementor-testimonial-wrapper">
-                                                        <div class="elementor-testimonial-content">“De nieuwe
-                                                            intercominstallatie is een enorme verbetering,
-                                                            gebruiksvriendelijk, strak gemonteerd en technisch perfect
-                                                            uitgevoerd.” — Tevreden klant</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div aria-labelledby="e-n-tab-title-1137729272"
-                                        class="elementor-element elementor-element-ef54908 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                        data-element_type="container" data-id="ef54908" data-tab-index="2"
-                                        id="e-n-tab-content-1137729272" role="tabpanel"
-                                        style="--n-tabs-title-order: 2;">
-                                        <div class="elementor-element elementor-element-0a0a89e e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="0a0a89e">
-                                            <div class="elementor-element elementor-element-82943ec elementor-widget__width-initial elementor-widget elementor-widget-image"
-                                                data-element_type="widget" data-id="82943ec"
-                                                data-widget_type="image.default">
-                                                <div class="elementor-widget-container">
-                                                    <img alt="RVS buitenpost bij intercom installatie Eindhoven"
-                                                        class="attachment-large size-large wp-image-4178"
-                                                        decoding="async" height="1024"
-                                                        sizes="(max-width: 768px) 100vw, 768px"
-                                                        src="../wp-content/uploads/2025/09/WhatsApp-Image-2025-09-03-at-17.04.08-8-768x1024.jpeg"
-                                                        srcset="https://nrtelektroservice.nl/wp-content/uploads/2025/09/WhatsApp-Image-2025-09-03-at-17.04.08-8-768x1024.jpeg 768w, https://nrtelektroservice.nl/wp-content/uploads/2025/09/WhatsApp-Image-2025-09-03-at-17.04.08-8-225x300.jpeg 225w, https://nrtelektroservice.nl/wp-content/uploads/2025/09/WhatsApp-Image-2025-09-03-at-17.04.08-8-1152x1536.jpeg 1152w, https://nrtelektroservice.nl/wp-content/uploads/2025/09/WhatsApp-Image-2025-09-03-at-17.04.08-8-1536x2048.jpeg 1536w, https://nrtelektroservice.nl/wp-content/uploads/2025/09/WhatsApp-Image-2025-09-03-at-17.04.08-8-scaled.jpeg 1920w"
-                                                        width="768" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-346b5b7 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="346b5b7">
-                                            <div class="elementor-element elementor-element-62ae19a elementor-widget elementor-widget-heading"
-                                                data-element_type="widget" data-id="62ae19a"
-                                                data-widget_type="heading.default">
-                                                <div class="elementor-widget-container">
-                                                    <h6 class="elementor-heading-title elementor-size-default">Nieuwe
-                                                        intercominstallatie met modern 2Voice-systeem</h6>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-dec34f1 elementor-widget elementor-widget-text-editor"
-                                                data-element_type="widget" data-id="dec34f1"
-                                                data-widget_type="text-editor.default">
-                                                <div class="elementor-widget-container">
-                                                    <p>Onlangs hebben wij een complete intercominstallatie vervangen
-                                                        door een modern 2Voice-systeem van Urmet, inclusief een nieuwe
-                                                        buitenpost. Met dit systeem is de communicatie tussen bewoners
-                                                        en bezoekers een stuk duidelijker, gebruiksvriendelijker en
-                                                        veiliger geworden. De installatie is volledig vernieuwd en
-                                                        professioneel afgewerkt, zodat de bewoners weer jarenlang kunnen
-                                                        rekenen op een betrouwbare en moderne oplossing.</p>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-c9700ee elementor-widget elementor-widget-testimonial"
-                                                data-element_type="widget" data-id="c9700ee"
-                                                data-widget_type="testimonial.default">
-                                                <div class="elementor-widget-container">
-                                                    <div class="elementor-testimonial-wrapper">
-                                                        <div class="elementor-testimonial-content">“De nieuwe
-                                                            intercominstallatie is een enorme verbetering,
-                                                            gebruiksvriendelijk, strak gemonteerd en technisch perfect
-                                                            uitgevoerd.” — Tevreden klant</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div aria-labelledby="e-n-tab-title-1137729273"
-                                        class="elementor-element elementor-element-bc636f5 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                        data-element_type="container" data-id="bc636f5" data-tab-index="3"
-                                        id="e-n-tab-content-1137729273" role="tabpanel"
-                                        style="--n-tabs-title-order: 3;">
-                                        <div class="elementor-element elementor-element-e2fb132 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="e2fb132">
-                                            <div class="elementor-element elementor-element-cfaddf2 elementor-widget elementor-widget-image"
-                                                data-element_type="widget" data-id="cfaddf2"
-                                                data-widget_type="image.default">
-                                                <div class="elementor-widget-container">
-                                                    <img alt="Intercom installatie Eindhoven met vernieuwde bekabeling"
-                                                        decoding="async" loading="lazy"
-                                                        src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-09-03-at-17.04.08-scaled-rb7vwe0q5kazdy19ebuw7s0lw1okxd4aar7v9wmbns.jpeg"
-                                                        title="Bekabeling intercom installatie Eindhoven" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-3f61802 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="3f61802">
-                                            <div class="elementor-element elementor-element-f34d5a0 elementor-widget elementor-widget-heading"
-                                                data-element_type="widget" data-id="f34d5a0"
-                                                data-widget_type="heading.default">
-                                                <div class="elementor-widget-container">
-                                                    <h6 class="elementor-heading-title elementor-size-default">
-                                                        Vernieuwing intercominstallatie met behoud van originele
-                                                        beldrukkers</h6>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-b84072e elementor-widget elementor-widget-text-editor"
-                                                data-element_type="widget" data-id="b84072e"
-                                                data-widget_type="text-editor.default">
-                                                <div class="elementor-widget-container">
-                                                    <p>Wij hebben de volledige intercominstallatie vervangen en
-                                                        tegelijkertijd de bestaande beldrukkers behouden. Op deze manier
-                                                        is het systeem volledig vernieuwd en modern, terwijl de
-                                                        uitstraling van de postkast hetzelfde is gebleven. Het resultaat
-                                                        is een betrouwbare installatie die perfect aansluit bij de
-                                                        wensen van de bewoners</p>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-eb67614 elementor-widget elementor-widget-testimonial"
-                                                data-element_type="widget" data-id="eb67614"
-                                                data-widget_type="testimonial.default">
-                                                <div class="elementor-widget-container">
-                                                    <div class="elementor-testimonial-wrapper">
-                                                        <div class="elementor-testimonial-content">“Een moderne
-                                                            oplossing met behoud van het originele karakter, precies wat
-                                                            we wilden.” — Tevreden klant</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+
+            <div class="nrt-intercom-panel" id="intercom3">
+                <div class="nrt-intercom-image">
+                    <img src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-09-03-at-17.04.08-scaled-rb7vwe0q5kazdy19ebuw7s0lw1okxd4aar7v9wmbns.jpeg" alt="Vernieuwde bekabeling intercom">
+                </div>
+                <div class="nrt-intercom-info">
+                    <h6>Vernieuwing intercominstallatie met behoud van originele beldrukkers</h6>
+                    <p>Wij hebben de volledige intercominstallatie vervangen en tegelijkertijd de bestaande beldrukkers behouden. Op deze manier is het systeem volledig vernieuwd en modern, terwijl de uitstraling van de postkast hetzelfde is gebleven. Een perfecte balans tussen techniek en karakter.</p>
+                    <div class="nrt-intercom-testimonial">
+                        “Een moderne oplossing met behoud van het originele karakter, precies wat we wilden.” — Tevreden klant
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const intercomButtons = document.querySelectorAll('.nrt-intercom-btn');
+        const intercomPanels = document.querySelectorAll('.nrt-intercom-panel');
+
+        intercomButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+
+                // Update knoppen
+                intercomButtons.forEach(b => b.classList.remove('is-active'));
+                this.classList.add('is-active');
+
+                // Update panels
+                intercomPanels.forEach(p => p.classList.remove('is-active'));
+                document.getElementById(targetId).classList.add('is-active');
+            });
+        });
+    });
+</script>
         <div class="elementor-element elementor-element-69596ee e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no elementor-invisible e-con e-parent"
             data-element_type="container" data-id="69596ee"
             data-settings='{"background_background":"classic","animation":"fadeInUp"}'>

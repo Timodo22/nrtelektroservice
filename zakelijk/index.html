@@ -5635,92 +5635,187 @@ document.getElementById('zakelijkForm').addEventListener('submit', async (e) => 
                 </div>
             </div>
         </div>
-        <div class="elementor-element elementor-element-9ca9b83 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no elementor-invisible e-con e-parent"
-            data-element_type="container" data-id="9ca9b83"
-            data-settings='{"background_background":"classic","animation":"slideInLeft"}'>
-            <div class="e-con-inner">
-                <div class="elementor-element elementor-element-f4caf43 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                    data-element_type="container" data-id="f4caf43" data-settings='{"background_background":"classic"}'>
-                    <div class="elementor-element elementor-element-43b6b05 elementor-widget elementor-widget-image"
-                        data-element_type="widget" data-id="43b6b05" data-widget_type="image.default">
-                        <div class="elementor-widget-container">
-                            <img alt="Laadpaal installatie door installatiebedrijf Eindhoven"
-                                class="attachment-full size-full wp-image-4344" decoding="async" fetchpriority="high"
-                                height="884" sizes="(max-width: 1339px) 100vw, 1339px"
-                                src="../wp-content/uploads/2025/10/NRT-OverOns.png"
-                                srcset="https://nrtelektroservice.nl/wp-content/uploads/2025/10/NRT-OverOns.png 1339w, https://nrtelektroservice.nl/wp-content/uploads/2025/10/NRT-OverOns-300x198.png 300w, https://nrtelektroservice.nl/wp-content/uploads/2025/10/NRT-OverOns-1024x676.png 1024w, https://nrtelektroservice.nl/wp-content/uploads/2025/10/NRT-OverOns-768x507.png 768w"
-                                width="1339"> </img>
-                        </div>
-                    </div>
+<style>
+    /* --- PROJECTEN SECTIE STYLING --- */
+    .nrt-custom-section {
+        padding: 80px 20px;
+        background-color: #fafafa;
+        font-family: 'Rubik', sans-serif;
+    }
+
+    .nrt-custom-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .nrt-custom-header h6 {
+        color: #cb4154; 
+        font-size: 17px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .nrt-custom-header h2 {
+        color: #131d3b; 
+        font-size: 38px;
+        font-weight: 700;
+    }
+
+    .nrt-custom-container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+
+    /* TABS NAVIGATIE - SUBTIELE STYLING */
+    .nrt-custom-nav {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .nrt-custom-btn {
+        background: none;
+        border: none;
+        padding: 15px 10px;
+        font-family: 'Rubik', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #888888;
+        cursor: pointer;
+        position: relative;
+        transition: 0.3s;
+        text-transform: uppercase;
+    }
+
+    .nrt-custom-btn:hover {
+        color: #131d3b;
+    }
+
+    .nrt-custom-btn:after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #cb4154;
+        transition: 0.3s ease;
+    }
+
+    .nrt-custom-btn.is-active {
+        color: #131d3b;
+        font-weight: 700;
+    }
+
+    .nrt-custom-btn.is-active:after {
+        width: 100%;
+    }
+
+    /* CONTENT LAYOUT */
+    .nrt-custom-panel {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        animation: nrtFadeInCustom 0.5s ease forwards;
+    }
+
+    .nrt-custom-panel.is-active {
+        display: grid;
+    }
+
+    .nrt-custom-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .nrt-custom-info h6 {
+        color: #131d3b;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        line-height: 1.3;
+    }
+
+    .nrt-custom-info p {
+        color: #171717;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    @keyframes nrtFadeInCustom {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .nrt-custom-panel { grid-template-columns: 1fr; }
+        .nrt-custom-header h2 { font-size: 28px; }
+        .nrt-custom-nav { flex-wrap: wrap; gap: 10px; }
+    }
+</style>
+
+<section class="nrt-custom-section">
+    <div class="nrt-custom-header">
+        <h6>Eerder werk</h6>
+        <h2>Bekijk onze projecten</h2>
+    </div>
+
+    <div class="nrt-custom-container">
+        <div class="nrt-custom-nav">
+            <button class="nrt-custom-btn is-active" data-target="proj1">Project 1</button>
+            <button class="nrt-custom-btn" data-target="proj2">Project 2</button>
+        </div>
+
+        <div class="nrt-custom-content">
+            <div class="nrt-custom-panel is-active" id="proj1">
+                <div class="nrt-custom-image">
+                    <img src="../zakelijk/Vervanging hoofdverdeelkast.jpg" alt="Vervanging hoofdverdeelkast">
                 </div>
-                <div class="elementor-element elementor-element-6162afa e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                    data-element_type="container" data-id="6162afa">
-                    <div class="elementor-element elementor-element-f587d7a elementor-widget elementor-widget-heading"
-                        data-element_type="widget" data-id="f587d7a" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h6 class="elementor-heading-title elementor-size-default">Neem contact op</h6>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-0f5ddab elementor-widget elementor-widget-heading"
-                        data-element_type="widget" data-id="0f5ddab" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h3 class="elementor-heading-title elementor-size-default">Hierom NRT Elektroservice!</h3>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-c8545ba elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
-                        data-element_type="widget" data-id="c8545ba" data-widget_type="icon-list.default">
-                        <div class="elementor-widget-container">
-                            <ul class="elementor-icon-list-items">
-                                <li class="elementor-icon-list-item">
-                                    <span class="elementor-icon-list-icon">
-                                        <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                    <span class="elementor-icon-list-text">Zo snel mogelijk een monteur op locatie in
-                                        Brabant</span>
-                                </li>
-                                <li class="elementor-icon-list-item">
-                                    <span class="elementor-icon-list-icon">
-                                        <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                    <span class="elementor-icon-list-text">Persoonlijk contact met je vaste
-                                        elektricien</span>
-                                </li>
-                                <li class="elementor-icon-list-item">
-                                    <span class="elementor-icon-list-icon">
-                                        <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                    <span class="elementor-icon-list-text">Snelle hulp bij storingen en
-                                        spoedklussen</span>
-                                </li>
-                                <li class="elementor-icon-list-item">
-                                    <span class="elementor-icon-list-icon">
-                                        <i aria-hidden="true" class="fas fa-check-circle"></i> </span>
-                                    <span class="elementor-icon-list-text">Gespecialiseerd in laadpalen, groepenkasten
-                                        en verlichting</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="elementor-element elementor-element-6e04f22 elementor-view-stacked elementor-position-left elementor-mobile-position-left elementor-shape-circle elementor-widget elementor-widget-icon-box"
-                        data-element_type="widget" data-id="6e04f22" data-widget_type="icon-box.default">
-                        <div class="elementor-widget-container">
-                            <div class="elementor-icon-box-wrapper">
-                                <div class="elementor-icon-box-icon">
-                                    <a aria-label="Kom sneller in contact!" class="elementor-icon" href="tel:0657886664"
-                                        tabindex="-1">
-                                        <i aria-hidden="true" class="fas fa-phone"></i> </a>
-                                </div>
-                                <div class="elementor-icon-box-content">
-                                    <h6 class="elementor-icon-box-title">
-                                        <a href="tel:0657886664">
-                                            Kom sneller in contact! </a>
-                                    </h6>
-                                    <p class="elementor-icon-box-description">
-                                        +31 6 578 866 64 </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="nrt-custom-info">
+                    <h6>Vervanging hoofdverdeelkast</h6>
+                    <p>De bestaande hoofdverdeelkast is volledig vervangen en opnieuw ingericht. De installatie is overzichtelijk opgebouwd, correct afgezekerd en uitgevoerd volgens de geldende normen. Hiermee is de elektrische installatie weer veilig en betrouwbare in gebruik.</p>
+                </div>
+            </div>
+
+            <div class="nrt-custom-panel" id="proj2">
+                <div class="nrt-custom-image">
+                    <img src="../zakelijk/Onderverdeler kapperszaak.jpg" alt="Onderverdeler kapperszaak">
+                </div>
+                <div class="nrt-custom-info">
+                    <h6>Onderverdeler kapperszaak</h6>
+                    <p>In deze kapperszaak hebben wij een onderverdeler geplaatst en de installatie opnieuw aangelegd. Alles is netjes en overzichtelijk uitgevoerd, passend bij de ruimte en het gebruik van de zaak.</p>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const customButtons = document.querySelectorAll('.nrt-custom-btn');
+        const customPanels = document.querySelectorAll('.nrt-custom-panel');
+
+        customButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+
+                // Update knoppen status
+                customButtons.forEach(b => b.classList.remove('is-active'));
+                this.classList.add('is-active');
+
+                // Update panels zichtbaarheid
+                customPanels.forEach(p => p.classList.remove('is-active'));
+                document.getElementById(targetId).classList.add('is-active');
+            });
+        });
+    });
+</script>
         <div class="elementor-element elementor-element-3110143 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no elementor-invisible e-con e-parent"
             data-element_type="container" data-id="3110143"
             data-settings='{"background_background":"classic","animation":"fadeInUp"}'>

@@ -6236,234 +6236,216 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         </div>
-        <div class="elementor-element elementor-element-94863a2 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-parent"
-            data-element_type="container" data-id="94863a2" data-settings='{"background_background":"classic"}'>
-            <div class="e-con-inner">
-                <div class="elementor-element elementor-element-0686349 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                    data-element_type="container" data-id="0686349">
-                    <div class="elementor-element elementor-element-a2b7286 elementor-widget elementor-widget-heading"
-                        data-element_type="widget" data-id="a2b7286" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h6 class="elementor-heading-title elementor-size-default">Eerder werk</h6>
-                        </div>
+        <style>
+    /* --- ELEMENTOR NAVAL STYLING REPLICATIE --- */
+    .nrt-projects-section {
+        padding: 80px 20px;
+        background-color: #fafafa; /* Lichte achtergrond */
+        font-family: 'Rubik', sans-serif;
+    }
+
+    .nrt-projects-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .nrt-projects-header h6 {
+        color: #cb4154; 
+        font-size: 17px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .nrt-projects-header h2 {
+        color: #131d3b; 
+        font-size: 38px;
+        font-weight: 700;
+    }
+
+    /* --- VERFIJNDE TABS STYLING --- */
+    .nrt-tabs-container {
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+
+    .nrt-tabs-nav {
+        display: flex;
+        justify-content: center;
+        gap: 30px; /* Meer ademruimte tussen knoppen */
+        margin-bottom: 40px;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .nrt-tab-btn {
+        background: none;
+        border: none;
+        padding: 15px 10px;
+        font-family: 'Rubik', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #888888; /* Subtiel grijs voor inactief */
+        cursor: pointer;
+        position: relative;
+        transition: 0.3s;
+    }
+
+    /* Hover effect */
+    .nrt-tab-btn:hover {
+        color: #131d3b;
+    }
+
+    /* De rode lijn onder de tekst */
+    .nrt-tab-btn:after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #cb4154;
+        transition: 0.3s ease;
+    }
+
+    /* Actieve status: tekst wordt donkerblauw, lijn wordt zichtbaar */
+    .nrt-tab-btn.is-active {
+        color: #131d3b; 
+        font-weight: 700;
+    }
+
+    .nrt-tab-btn.is-active:after {
+        width: 100%;
+    }
+
+    /* --- CONTENT LAYOUT --- */
+    .nrt-tab-panel {
+        display: none;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        animation: nrtFadeIn 0.5s ease forwards;
+    }
+
+    .nrt-tab-panel.is-active {
+        display: grid;
+    }
+
+    .nrt-project-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .nrt-project-info h6 {
+        color: #131d3b;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .nrt-project-info p {
+        color: #171717;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .nrt-testimonial {
+        border-left: 4px solid #cb4154;
+        padding-left: 20px;
+        font-style: italic;
+        color: #555;
+    }
+
+    @keyframes nrtFadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mobiele aanpassing */
+    @media (max-width: 768px) {
+        .nrt-tab-panel { grid-template-columns: 1fr; }
+        .nrt-projects-header h2 { font-size: 28px; }
+        .nrt-tabs-nav { flex-wrap: wrap; gap: 10px; }
+    }
+</style>
+
+<section class="nrt-projects-section">
+    <div class="nrt-projects-header">
+        <h6>Eerder werk</h6>
+        <h2>Bekijk onze projecten</h2>
+    </div>
+
+    <div class="nrt-tabs-container">
+        <div class="nrt-tabs-nav">
+            <button class="nrt-tab-btn is-active" data-target="project1">Project 1</button>
+            <button class="nrt-tab-btn" data-target="project2">Project 2</button>
+            <button class="nrt-tab-btn" data-target="project3">Project 3</button>
+        </div>
+
+        <div class="nrt-tabs-content">
+            <div class="nrt-tab-panel is-active" id="project1">
+                <div class="nrt-project-image">
+                    <img src="../wp-content/uploads/2025/08/Voorbeeld-Verlichting-2-1024x576.jpg" alt="Showroom verlichting">
+                </div>
+                <div class="nrt-project-info">
+                    <h6>Moderne showroom verlichting</h6>
+                    <p>Bij deze klus in Eindhoven verzorgde NRT de volledige verlichting van een moderne showroom. We hebben een lichtplan opgesteld met een combinatie van werkverlichting en sfeervolle LED-armaturen.</p>
+                    <div class="nrt-testimonial">
+                        “We wilden verlichting die zowel functioneel als representatief was. NRT dacht mee in ontwerp én uitvoering en leverde strak werk af.” — Eigenaar Showroom
                     </div>
-                    <div class="elementor-element elementor-element-55b2b7e elementor-widget elementor-widget-heading"
-                        data-element_type="widget" data-id="55b2b7e" data-widget_type="heading.default">
-                        <div class="elementor-widget-container">
-                            <h2 class="elementor-heading-title elementor-size-default">Bekijk onze projecten</h2>
-                        </div>
+                </div>
+            </div>
+
+            <div class="nrt-tab-panel" id="project2">
+                <div class="nrt-project-image">
+                    <img src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-08-15-at-15.06.52-2-scaled-rav89frultwg548j42a8j07lwhqphujf3ontatftl4.jpeg" alt="LED installatie">
+                </div>
+                <div class="nrt-project-info">
+                    <h6>Verlichting en noodverlichting vervangen</h6>
+                    <p>De oude armaturen maakten plaats voor energiezuinige en betrouwbare LED-oplossingen die bijdragen aan een lager energieverbruik en onderhoudsgemak.</p>
+                    <div class="nrt-testimonial">
+                        “We zochten een partner die niet alleen de technische installatie, maar ook de uitstraling kon verbeteren.” — Beheerder Wooncomplex
                     </div>
-                    <div class="elementor-element elementor-element-bb6e471 e-n-tabs-none elementor-widget elementor-widget-n-tabs"
-                        data-element_type="widget" data-id="bb6e471"
-                        data-settings='{"tabs_justify_horizontal":"center","tabs_justify_horizontal_mobile":"center","horizontal_scroll":"disable"}'
-                        data-widget_type="nested-tabs.default">
-                        <div class="elementor-widget-container">
-                            <div aria-label="Tabs. Open items met enter of spatie, sluit af met escape en navigeer met de pijltoetsen."
-                                class="e-n-tabs" data-widget-number="196535409">
-                                <div class="e-n-tabs-heading" role="tablist">
-                                    <button aria-controls="e-n-tab-content-1965354091" aria-selected="true"
-                                        class="e-n-tab-title" data-tab-index="1" id="e-n-tab-title-1965354091"
-                                        role="tab" style="--n-tabs-title-order: 1;" tabindex="0">
-                                        <span class="e-n-tab-title-text">
-                                            Project 1 </span>
-                                    </button>
-                                    <button aria-controls="e-n-tab-content-1965354092" aria-selected="false"
-                                        class="e-n-tab-title" data-tab-index="2" id="e-n-tab-title-1965354092"
-                                        role="tab" style="--n-tabs-title-order: 2;" tabindex="-1">
-                                        <span class="e-n-tab-title-text">
-                                            Project 2 </span>
-                                    </button>
-                                    <button aria-controls="e-n-tab-content-1965354093" aria-selected="false"
-                                        class="e-n-tab-title" data-tab-index="3" id="e-n-tab-title-1965354093"
-                                        role="tab" style="--n-tabs-title-order: 3;" tabindex="-1">
-                                        <span class="e-n-tab-title-text">
-                                            Project 3 </span>
-                                    </button>
-                                </div>
-                                <div class="e-n-tabs-content">
-                                    <div aria-labelledby="e-n-tab-title-1965354091"
-                                        class="e-active elementor-element elementor-element-ce0c322 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                        data-element_type="container" data-id="ce0c322" data-tab-index="1"
-                                        id="e-n-tab-content-1965354091" role="tabpanel"
-                                        style="--n-tabs-title-order: 1;">
-                                        <div class="elementor-element elementor-element-4f4c178 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="4f4c178">
-                                            <div class="elementor-element elementor-element-e3084e6 elementor-widget elementor-widget-image"
-                                                data-element_type="widget" data-id="e3084e6"
-                                                data-widget_type="image.default">
-                                                <div class="elementor-widget-container">
-                                                    <img alt="Verlichting installatie Eindhoven in moderne binnenruimte"
-                                                        class="attachment-large size-large wp-image-3897"
-                                                        decoding="async" height="576"
-                                                        sizes="(max-width: 1024px) 100vw, 1024px"
-                                                        src="../wp-content/uploads/2025/08/Voorbeeld-Verlichting-2-1024x576.jpg"
-                                                        srcset="https://nrtelektroservice.nl/wp-content/uploads/2025/08/Voorbeeld-Verlichting-2-1024x576.jpg 1024w, https://nrtelektroservice.nl/wp-content/uploads/2025/08/Voorbeeld-Verlichting-2-300x169.jpg 300w, https://nrtelektroservice.nl/wp-content/uploads/2025/08/Voorbeeld-Verlichting-2-768x432.jpg 768w, https://nrtelektroservice.nl/wp-content/uploads/2025/08/Voorbeeld-Verlichting-2-1536x864.jpg 1536w, https://nrtelektroservice.nl/wp-content/uploads/2025/08/Voorbeeld-Verlichting-2-2048x1152.jpg 2048w"
-                                                        width="1024"> </img>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-5a1551c e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="5a1551c">
-                                            <div class="elementor-element elementor-element-a626703 elementor-widget elementor-widget-heading"
-                                                data-element_type="widget" data-id="a626703"
-                                                data-widget_type="heading.default">
-                                                <div class="elementor-widget-container">
-                                                    <h6 class="elementor-heading-title elementor-size-default">
-                                                        Moderne showroom verlichting</h6>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-4ae0536 elementor-widget elementor-widget-text-editor"
-                                                data-element_type="widget" data-id="4ae0536"
-                                                data-widget_type="text-editor.default">
-                                                <div class="elementor-widget-container">
-                                                    <p>Bij deze klus in Eindhoven verzorgde NRT de volledige verlichting
-                                                        van een moderne showroom. We hebben een lichtplan opgesteld met
-                                                        een combinatie van werkverlichting en sfeervolle LED-armaturen.
-                                                        Oude armaturen zijn vervangen door energiezuinige alternatieven
-                                                        en het systeem is aangesloten op een slimme schakeltechniek.
-                                                        Alles is zorgvuldig gemonteerd en netjes afgewerkt, met oog voor
-                                                        uitstraling én efficiëntie.</p>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-313289b elementor-widget elementor-widget-testimonial"
-                                                data-element_type="widget" data-id="313289b"
-                                                data-widget_type="testimonial.default">
-                                                <div class="elementor-widget-container">
-                                                    <div class="elementor-testimonial-wrapper">
-                                                        <div class="elementor-testimonial-content">“We wilden
-                                                            verlichting die zowel functioneel als representatief was.
-                                                            NRT dacht mee in ontwerp én uitvoering en leverde strak werk
-                                                            af.” — Eigenaar Showroom Eindhoven</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div aria-labelledby="e-n-tab-title-1965354092"
-                                        class="elementor-element elementor-element-35aa8be e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                        data-element_type="container" data-id="35aa8be" data-tab-index="2"
-                                        id="e-n-tab-content-1965354092" role="tabpanel"
-                                        style="--n-tabs-title-order: 2;">
-                                        <div class="elementor-element elementor-element-34f7532 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="34f7532">
-                                            <div class="elementor-element elementor-element-1355ff5 elementor-widget elementor-widget-image"
-                                                data-element_type="widget" data-id="1355ff5"
-                                                data-widget_type="image.default">
-                                                <div class="elementor-widget-container">
-                                                    <img alt="LED verlichting installatie Eindhoven met inbouwspots"
-                                                        decoding="async" loading="lazy"
-                                                        src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-08-15-at-15.06.52-2-scaled-rav89frultwg548j42a8j07lwhqphujf3ontatftl4.jpeg"
-                                                        title="LED inbouwspots verlichting NRT installatie Eindhoven" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="elementor-element elementor-element-6facc50 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="6facc50">
-                                            <div class="elementor-element elementor-element-86c0295 elementor-widget elementor-widget-heading"
-                                                data-element_type="widget" data-id="86c0295"
-                                                data-widget_type="heading.default">
-                                                <div class="elementor-widget-container">
-                                                    <h6 class="elementor-heading-title elementor-size-default">
-                                                        Verlichting en noodverlichting vervangen</h6>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-1299fe1 elementor-widget elementor-widget-text-editor"
-                                                data-element_type="widget" data-id="1299fe1"
-                                                data-widget_type="text-editor.default">
-                                                <div class="elementor-widget-container">
-                                                    <p>Bij NRT Elektroservice hebben we recent een mooie klus afgerond
-                                                        waarbij we alle bestaande verlichting en noodverlichting hebben
-                                                        vervangen. De oude armaturen maakten plaats voor energiezuinige
-                                                        en betrouwbare LED-oplossingen die niet alleen zorgen voor een
-                                                        helder en prettig lichtbeeld, maar ook bijdragen aan een lager
-                                                        energieverbruik en onderhoudsgemak.</p>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-element elementor-element-e942bb0 elementor-widget elementor-widget-testimonial"
-                                                data-element_type="widget" data-id="e942bb0"
-                                                data-widget_type="testimonial.default">
-                                                <div class="elementor-widget-container">
-                                                    <div class="elementor-testimonial-wrapper">
-                                                        <div class="elementor-testimonial-content">“We zochten een
-                                                            partner die niet alleen de technische installatie, maar ook
-                                                            de uitstraling kon verbeteren. NRT leverde precies wat we
-                                                            nodig hadden.” — Beheerder Wooncomplex</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div aria-labelledby="e-n-tab-title-1965354093"
-                                        class="elementor-element elementor-element-c5b7aec e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                        data-element_type="container" data-id="c5b7aec" data-tab-index="3"
-                                        id="e-n-tab-content-1965354093" role="tabpanel"
-                                        style="--n-tabs-title-order: 3;">
-                                        <div class="elementor-element elementor-element-7379988 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                            data-element_type="container" data-id="7379988">
-                                            <div class="e-con-inner">
-                                                <div class="elementor-element elementor-element-78a6316 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                                    data-element_type="container" data-id="78a6316">
-                                                    <div class="elementor-element elementor-element-71ea92f elementor-widget elementor-widget-image"
-                                                        data-element_type="widget" data-id="71ea92f"
-                                                        data-widget_type="image.default">
-                                                        <div class="elementor-widget-container">
-                                                            <img alt="Buitenverlichting installatie Eindhoven bij appartementencomplex"
-                                                                decoding="async" loading="lazy"
-                                                                src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-08-15-at-15.06.52-3-scaled-rav89lez0d8acylnlxs557nk0ketdcvkbxce13soso.jpeg"
-                                                                title="Buitenverlichting installatie Eindhoven" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="elementor-element elementor-element-f703abf e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
-                                                    data-element_type="container" data-id="f703abf">
-                                                    <div class="elementor-element elementor-element-3635ad6 elementor-widget elementor-widget-heading"
-                                                        data-element_type="widget" data-id="3635ad6"
-                                                        data-widget_type="heading.default">
-                                                        <div class="elementor-widget-container">
-                                                            <h6 class="elementor-heading-title elementor-size-default">
-                                                                Volledige verlichtingsoplossing voor
-                                                                appartementencomplex</h6>
-                                                        </div>
-                                                    </div>
-                                                    <div class="elementor-element elementor-element-9850cab elementor-widget__width-initial elementor-widget elementor-widget-text-editor"
-                                                        data-element_type="widget" data-id="9850cab"
-                                                        data-widget_type="text-editor.default">
-                                                        <div class="elementor-widget-container">
-                                                            <p>In dit appartementencomplex realiseerde NRT de complete
-                                                                verlichtingsinstallatie. Zowel de galerijen, entrees als
-                                                                algemene ruimtes zijn voorzien van duurzame
-                                                                LED-verlichting. De verlichting draagt bij aan
-                                                                veiligheid, comfort en een moderne uitstraling van het
-                                                                complex. Met slimme oplossingen is ervoor gezorgd dat de
-                                                                verlichting energiezuinig functioneert, terwijl bewoners
-                                                                en bezoekers altijd kunnen rekenen op voldoende licht.
-                                                                Alles is strak geïnstalleerd en zorgvuldig afgewerkt,
-                                                                passend bij de architectuur van het gebouw.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="elementor-element elementor-element-551323f elementor-widget__width-initial elementor-widget elementor-widget-testimonial"
-                                                        data-element_type="widget" data-id="551323f"
-                                                        data-widget_type="testimonial.default">
-                                                        <div class="elementor-widget-container">
-                                                            <div class="elementor-testimonial-wrapper">
-                                                                <div class="elementor-testimonial-content">“NRT dacht
-                                                                    mee in duurzame keuzes en zorgde voor een
-                                                                    professionele afwerking. Het complex oogt modern en
-                                                                    veilig verlicht.” — Beheerder Appartementencomplex</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+            </div>
+
+            <div class="nrt-tab-panel" id="project3">
+                <div class="nrt-project-image">
+                    <img src="../wp-content/uploads/elementor/thumbs/WhatsApp-Image-2025-08-15-at-15.06.52-3-scaled-rav89lez0d8acylnlxs557nk0ketdcvkbxce13soso.jpeg" alt="Appartementencomplex">
+                </div>
+                <div class="nrt-project-info">
+                    <h6>Appartementencomplex Eindhoven</h6>
+                    <p>In dit complex realiseerde NRT de complete verlichtingsinstallatie voor galerijen en entrees. Focus op veiligheid, comfort en duurzaamheid.</p>
+                    <div class="nrt-testimonial">
+                        “NRT dacht mee in duurzame keuzes en zorgde voor een professionele afwerking.” — Beheerder Complex
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.nrt-tab-btn');
+        const panels = document.querySelectorAll('.nrt-tab-panel');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+
+                // Verwijder actieve klassen
+                buttons.forEach(b => b.classList.remove('is-active'));
+                panels.forEach(p => p.classList.remove('is-active'));
+
+                // Voeg actieve klasse toe aan gekozen tab
+                this.classList.add('is-active');
+                document.getElementById(target).classList.add('is-active');
+            });
+        });
+    });
+</script>
         <div class="elementor-element elementor-element-cb8d7d1 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no elementor-invisible e-con e-parent"
             data-element_type="container" data-id="cb8d7d1"
             data-settings='{"background_background":"classic","animation":"fadeInUp"}'>
