@@ -7133,9 +7133,9 @@
             totalExBtw += total;
             rows.push([
                 desc, 
-                count.toLocaleString('nl-NL', {minimumFractionDigits: 2}), 
-                price.toLocaleString('nl-NL', {minimumFractionDigits: 2}), 
-                total.toLocaleString('nl-NL', {minimumFractionDigits: 2})
+                count.toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2}), 
+                price.toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2}), 
+                total.toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2})
             ]);
         };
 
@@ -7214,11 +7214,11 @@
 
         doc.setFont("helvetica", "normal");
         doc.text("Totaal excl. btw", startXTotal, finalY);
-        doc.text(`${totalExBtw.toLocaleString('nl-NL', {minimumFractionDigits: 2})} €`, startXTotal + colWidthLabel + colWidthValue, finalY, {align: 'right'});
+        doc.text(`${totalExBtw.toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €`, startXTotal + colWidthLabel + colWidthValue, finalY, {align: 'right'});
         
         finalY += 6;
         doc.text("Totaal btw", startXTotal, finalY);
-        doc.text(`${btwBedrag.toLocaleString('nl-NL', {minimumFractionDigits: 2})} €`, startXTotal + colWidthLabel + colWidthValue, finalY, {align: 'right'});
+        doc.text(`${btwBedrag.toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €`, startXTotal + colWidthLabel + colWidthValue, finalY, {align: 'right'});
 
         finalY += 2;
         doc.line(startXTotal, finalY, 195, finalY);
@@ -7226,7 +7226,7 @@
 
         doc.setFont("helvetica", "bold");
         doc.text("Offertebedrag", startXTotal, finalY);
-        doc.text(`${totaalInclusief.toLocaleString('nl-NL', {minimumFractionDigits: 2})} €`, startXTotal + colWidthLabel + colWidthValue, finalY, {align: 'right'});
+        doc.text(`${totaalInclusief.toLocaleString('nl-NL', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €`, startXTotal + colWidthLabel + colWidthValue, finalY, {align: 'right'});
 
         // 8. SLOTTEKST
         let textY = doc.lastAutoTable.finalY + 40; 
