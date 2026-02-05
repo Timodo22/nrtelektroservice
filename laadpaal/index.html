@@ -6516,7 +6516,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
 
-    <style>
+<style>
     /* Scope de CSS voor NRT Elektroservice */
     .nrt-form-wrapper {
         --nrt-red: #e30613;
@@ -7140,10 +7140,18 @@
         };
 
         // --- BUNDELING LOGICA ---
-        // We tellen alles op voor "Basis installatie" behalve kabel en graafwerk
+        // We tellen alles op voor "Basis installatie" inclusief KABEL, behalve graafwerk
         let basisPrijs = prices.voorrijkosten + prices.klein_materiaal + prices.automaat + prices.arbeid;
+        
+        // Laadpaal toevoegen
         const paalPrijs = chargerPrices[data.laadpaal_keuze] || 0;
         basisPrijs += paalPrijs;
+
+        // Kabel toevoegen aan basisprijs
+        const kabelMeters = parseFloat(data.afstand_kast) || 0;
+        if(kabelMeters > 0) {
+            basisPrijs += (kabelMeters * prices.kabel_per_meter);
+        }
 
         let description = `Basis installatie incl. ${data.laadpaal_keuze}`;
 
@@ -7156,11 +7164,8 @@
         // Voeg de gecombineerde regel toe
         addRow(description, 1, basisPrijs);
 
-        // --- UITZONDERINGEN (Losse regels) ---
-        const kabelMeters = parseFloat(data.afstand_kast) || 0;
-        if(kabelMeters > 0) {
-            addRow(`Draka VULT Dca Installatiekabel 5G6mm² (${kabelMeters}m)`, kabelMeters, prices.kabel_per_meter);
-        }
+        // --- UITZONDERINGEN (Alleen Graafwerk blijft los) ---
+        // Kabel is nu hierboven al meegenomen, dus die hoeft hier niet meer apart.
 
         const graafMeters = (data.graafwerk === 'Ja') ? (parseFloat(data.graaf_afstand) || 0) : 0;
         if(graafMeters > 0) {
