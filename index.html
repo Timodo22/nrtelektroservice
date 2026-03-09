@@ -5515,9 +5515,7 @@
         </div>
     </div>
     <div class="elementor elementor-4541" data-elementor-id="4541" data-elementor-type="wp-page">
-        <div class="elementor-element elementor-element-4b41ff0 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-parent"
-            data-element_type="container" data-id="4b41ff0"
-            data-settings='{"background_background":"slideshow","background_slideshow_gallery":[{"id":4322,"url":"https:\/\/nrtelektroservice.nl\/wp-content\/uploads\/2025\/10\/6132D785-D549-4191-9C57-B603024E7D33_1_102_o.jpeg"},{"id":4340,"url":"https:\/\/nrtelektroservice.nl\/wp-content\/uploads\/2025\/10\/NRT-team-e1760033738192.jpeg"},{"id":4319,"url":"https:\/\/nrtelektroservice.nl\/wp-content\/uploads\/2025\/10\/5460C556-542A-490C-97B3-0B481BAD7617_1_105_c.jpeg"},{"id":2061,"url":"https:\/\/nrtelektroservice.nl\/wp-content\/uploads\/2025\/06\/electric-car-charging-home-clean-energy-filling-technology-scaled-1-1.jpg"},{"id":2062,"url":"https:\/\/nrtelektroservice.nl\/wp-content\/uploads\/2025\/06\/woman-charging-her-electric-car-with-charging-pistol-scaled-1-1.jpg"}],"background_slideshow_transition_duration":1000,"background_slideshow_loop":"yes","background_slideshow_slide_duration":5000,"background_slideshow_slide_transition":"fade"}'>
+<div id="mijn-slideshow" class="elementor-element elementor-element-4b41ff0 e-flex e-con-boxed wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con" style="aspect-ratio: 16 / 9 !important; width: 100% !important; background-image: url('Afbeeldingen/Background.jpeg') !important; background-color: #f5f5f5 !important; background-size: cover !important; background-position: top center !important; background-repeat: no-repeat !important; transition: background-image 1s ease-in-out !important;">
             <div class="e-con-inner">
                 <div class="elementor-element elementor-element-1de03b1 e-con-full e-flex wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no e-con e-child"
                     data-element_type="container" data-id="1de03b1">
@@ -5583,6 +5581,47 @@
                 </div>
             </div>
         </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Jouw afbeeldingen
+    const afbeeldingen = [
+        "Afbeeldingen/Background.jpeg",
+        "Afbeeldingen/Background1.jpeg",
+        "Afbeeldingen/Background2.jpeg",
+        "Afbeeldingen/Backround3.jpeg" // Check even of hier een 'g' mist!
+    ];
+
+    const slideshowContainer = document.getElementById("mijn-slideshow");
+    
+    // Check of de container gevonden wordt
+    if (!slideshowContainer) {
+        console.error("Fout: Kan id='mijn-slideshow' niet vinden in de HTML!");
+        return;
+    }
+
+    // PRELOADER: Laad alle afbeeldingen direct in op de achtergrond om de grijze flits te voorkomen
+    afbeeldingen.forEach(function(src) {
+        const img = new Image();
+        img.src = src;
+    });
+
+    let huidigeIndex = 0;
+
+    function wisselAchtergrond() {
+        huidigeIndex = (huidigeIndex + 1) % afbeeldingen.length; 
+        
+        // Forceer de achtergrond met setProperty
+        slideshowContainer.style.setProperty('background-image', `url('${afbeeldingen[huidigeIndex]}')`, 'important');
+        
+        // Vertel ons in de console dat hij gewisseld is
+        console.log("Wisselen naar foto:", afbeeldingen[huidigeIndex]);
+    }
+
+    // Rustig tempo: Wissel elke 6 seconden (6000 milliseconden)
+    setInterval(wisselAchtergrond, 6000);
+});
+</script>
         <section
             class="elementor-section elementor-top-section elementor-element elementor-element-e4d8e2b elementor-section-boxed elementor-section-height-default elementor-section-height-default wpr-particle-no wpr-jarallax-no wpr-parallax-no wpr-sticky-section-no"
             data-element_type="section" data-id="e4d8e2b">
@@ -7529,7 +7568,6 @@
                             <img alt="" class="attachment-large size-large wp-image-1286" height="314"
                                 sizes="(max-width: 1024px) 100vw, 1024px"
                                 src="wp-content/uploads/2025/06/NRT-Logo-Website-210x64.png"
-                                srcset="https://nrtelektroservice.nl/wp-content/uploads/2025/06/NRT-Logo-Website-1024x314.png 1024w, https://nrtelektroservice.nl/wp-content/uploads/2025/06/NRT-Logo-Website-300x92.png 300w, https://nrtelektroservice.nl/wp-content/uploads/2025/06/NRT-Logo-Website-768x235.png 768w, https://nrtelektroservice.nl/wp-content/uploads/2025/06/NRT-Logo-Website-210x64.png 210w, https://nrtelektroservice.nl/wp-content/uploads/2025/06/NRT-Logo-Website.png 1397w"
                                 width="1024" />
                         </div>
                     </div>
@@ -8099,7 +8137,7 @@
                     return Object.assign(acc, { [k]: v });
                 }, {});
 
-                const url = "https://nrtelektroservice.nl/wp-json/iawp/search";
+                const url = "/wp-json/iawp/search";
                 const body = {
                     referrer_url,
                     utm_source: params.utm_source,
@@ -8189,7 +8227,7 @@
     <script id="contact-form-7-js-before">
         var wpcf7 = {
             "api": {
-                "root": "https:\/\/nrtelektroservice.nl\/wp-json\/",
+                "root": "/wp-json\/",
                 "namespace": "contact-form-7\/v1"
             }
         };
@@ -8202,7 +8240,7 @@
         src="wp-content/plugins/elementor/assets/js/frontend-modules.min_ver_3_33_1.js"></script>
     <script id="jquery-ui-core-js" src="wp-includes/js/jquery/ui/core.min_ver_1_13_3.js"></script>
     <script id="elementor-frontend-js-before">
-        var elementorFrontendConfig = { "environmentMode": { "edit": false, "wpPreview": false, "isScriptDebug": false }, "i18n": { "shareOnFacebook": "Deel via Facebook", "shareOnTwitter": "Deel via Twitter", "pinIt": "Pin dit", "download": "Downloaden", "downloadImage": "Download afbeelding", "fullscreen": "Volledig scherm", "zoom": "Zoom", "share": "Delen", "playVideo": "Video afspelen", "previous": "Vorige", "next": "Volgende", "close": "Sluiten", "a11yCarouselPrevSlideMessage": "Vorige slide", "a11yCarouselNextSlideMessage": "Volgende slide", "a11yCarouselFirstSlideMessage": "Ga naar de eerste slide", "a11yCarouselLastSlideMessage": "Ga naar de laatste slide", "a11yCarouselPaginationBulletMessage": "Ga naar slide" }, "is_rtl": false, "breakpoints": { "xs": 0, "sm": 480, "md": 768, "lg": 1025, "xl": 1440, "xxl": 1600 }, "responsive": { "breakpoints": { "mobile": { "label": "Mobiel portret", "value": 767, "default_value": 767, "direction": "max", "is_enabled": true }, "mobile_extra": { "label": "Mobiel landschap", "value": 880, "default_value": 880, "direction": "max", "is_enabled": false }, "tablet": { "label": "Tablet portret", "value": 1024, "default_value": 1024, "direction": "max", "is_enabled": true }, "tablet_extra": { "label": "Tablet landschap", "value": 1200, "default_value": 1200, "direction": "max", "is_enabled": false }, "laptop": { "label": "Laptop", "value": 1366, "default_value": 1366, "direction": "max", "is_enabled": false }, "widescreen": { "label": "Breedbeeld", "value": 2400, "default_value": 2400, "direction": "min", "is_enabled": false } }, "hasCustomBreakpoints": false }, "version": "3.33.1", "is_static": false, "experimentalFeatures": { "additional_custom_breakpoints": true, "container": true, "nested-elements": true, "home_screen": true, "global_classes_should_enforce_capabilities": true, "e_variables": true, "cloud-library": true, "e_opt_in_v4_page": true, "import-export-customization": true }, "urls": { "assets": "https:\/\/nrtelektroservice.nl\/wp-content\/plugins\/elementor\/assets\/", "ajaxurl": "https:\/\/nrtelektroservice.nl\/wp-admin\/admin-ajax.php", "uploadUrl": "https:\/\/nrtelektroservice.nl\/wp-content\/uploads" }, "nonces": { "floatingButtonsClickTracking": "be2232ddbe" }, "swiperClass": "swiper", "settings": { "page": [], "editorPreferences": [] }, "kit": { "active_breakpoints": ["viewport_mobile", "viewport_tablet"], "global_image_lightbox": "yes", "lightbox_enable_counter": "yes", "lightbox_enable_fullscreen": "yes", "lightbox_enable_zoom": "yes", "lightbox_enable_share": "yes", "lightbox_title_src": "title", "lightbox_description_src": "description" }, "post": { "id": 4541, "title": "Slimme%20elektro-oplossingen%20in%20Eindhoven%20-%20NRT%20Elektroservice", "excerpt": "", "featuredImage": "https:\/\/nrtelektroservice.nl\/wp-content\/uploads\/2025\/10\/NRT-team-e1760033738192-804x1024.jpeg" } };
+        var elementorFrontendConfig = { "environmentMode": { "edit": false, "wpPreview": false, "isScriptDebug": false }, "i18n": { "shareOnFacebook": "Deel via Facebook", "shareOnTwitter": "Deel via Twitter", "pinIt": "Pin dit", "download": "Downloaden", "downloadImage": "Download afbeelding", "fullscreen": "Volledig scherm", "zoom": "Zoom", "share": "Delen", "playVideo": "Video afspelen", "previous": "Vorige", "next": "Volgende", "close": "Sluiten", "a11yCarouselPrevSlideMessage": "Vorige slide", "a11yCarouselNextSlideMessage": "Volgende slide", "a11yCarouselFirstSlideMessage": "Ga naar de eerste slide", "a11yCarouselLastSlideMessage": "Ga naar de laatste slide", "a11yCarouselPaginationBulletMessage": "Ga naar slide" }, "is_rtl": false, "breakpoints": { "xs": 0, "sm": 480, "md": 768, "lg": 1025, "xl": 1440, "xxl": 1600 }, "responsive": { "breakpoints": { "mobile": { "label": "Mobiel portret", "value": 767, "default_value": 767, "direction": "max", "is_enabled": true }, "mobile_extra": { "label": "Mobiel landschap", "value": 880, "default_value": 880, "direction": "max", "is_enabled": false }, "tablet": { "label": "Tablet portret", "value": 1024, "default_value": 1024, "direction": "max", "is_enabled": true }, "tablet_extra": { "label": "Tablet landschap", "value": 1200, "default_value": 1200, "direction": "max", "is_enabled": false }, "laptop": { "label": "Laptop", "value": 1366, "default_value": 1366, "direction": "max", "is_enabled": false }, "widescreen": { "label": "Breedbeeld", "value": 2400, "default_value": 2400, "direction": "min", "is_enabled": false } }, "hasCustomBreakpoints": false }, "version": "3.33.1", "is_static": false, "experimentalFeatures": { "additional_custom_breakpoints": true, "container": true, "nested-elements": true, "home_screen": true, "global_classes_should_enforce_capabilities": true, "e_variables": true, "cloud-library": true, "e_opt_in_v4_page": true, "import-export-customization": true }, "urls": { "assets": "/wp-content\/plugins\/elementor\/assets\/", "ajaxurl": "/wp-admin\/admin-ajax.php", "uploadUrl": "/wp-content\/uploads" }, "nonces": { "floatingButtonsClickTracking": "be2232ddbe" }, "swiperClass": "swiper", "settings": { "page": [], "editorPreferences": [] }, "kit": { "active_breakpoints": ["viewport_mobile", "viewport_tablet"], "global_image_lightbox": "yes", "lightbox_enable_counter": "yes", "lightbox_enable_fullscreen": "yes", "lightbox_enable_zoom": "yes", "lightbox_enable_share": "yes", "lightbox_title_src": "title", "lightbox_description_src": "description" }, "post": { "id": 4541, "title": "Slimme%20elektro-oplossingen%20in%20Eindhoven%20-%20NRT%20Elektroservice", "excerpt": "", "featuredImage": "/wp-content\/uploads\/2025\/10\/NRT-team-e1760033738192-804x1024.jpeg" } };
         //# sourceURL=elementor-frontend-js-before
     </script>
     <script id="elementor-frontend-js" src="wp-content/plugins/elementor/assets/js/frontend.min_ver_3_33_1.js"></script>
