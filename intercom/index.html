@@ -6112,35 +6112,57 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     
-    // --- API CONFIGURATIE ---
     const API_URL = "https://nrtapi.timosteen22.workers.dev/submit"; 
     const form = document.getElementById('nrt-offerte-form');
     const statusDiv = document.getElementById('nrt-form-status');
     const submitBtn = document.getElementById('nrt-submit-btn');
 
-    // Helper functie: Bestand naar Base64 converteren
-    const fileToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
+    // Afbeelding verkleinen naar max 1200px en 70% kwaliteit
+    const resizeImage = (file) => {
+        return new Promise((resolve) => {
             const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const maxSize = 1200;
+                    let { width, height } = img;
+                    
+                    if (width > maxSize || height > maxSize) {
+                        if (width > height) {
+                            height = Math.round(height * maxSize / width);
+                            width = maxSize;
+                        } else {
+                            width = Math.round(width * maxSize / height);
+                            height = maxSize;
+                        }
+                    }
+                    
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+                    
+                    const base64 = canvas.toDataURL('image/jpeg', 0.7)
+                        .replace(/^data:image\/\w+;base64,/, '');
+                    resolve(base64);
+                };
+                img.src = e.target.result;
+            };
             reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.toString().replace(/^data:(.*,)?/, ''));
-            reader.onerror = error => reject(error);
         });
     };
 
     form.addEventListener('submit', async function(e) {
         e.preventDefault(); 
 
-        // 1. UI Update (Laden...)
         submitBtn.value = "Bezig met verzenden...";
         submitBtn.disabled = true;
         statusDiv.style.display = 'none';
 
         try {
-            // 2. Data verzamelen
             const formData = new FormData(form);
             const payload = {
-                category: formData.get('form_category'), // Pakt de waarde: Intercom installatie
+                category: formData.get('form_category'),
                 firstname: formData.get('firstname'),
                 lastname: formData.get('lastname'),
                 email: formData.get('your-email'),
@@ -6152,21 +6174,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 attachments: []
             };
 
-            // 3. Bestanden verwerken
             const fileInput = form.querySelector('input[name="file-631"]');
             if (fileInput && fileInput.files.length > 0) {
+
+                // Totaal limiet: max 10MB
+                const totalSize = Array.from(fileInput.files).reduce((sum, f) => sum + f.size, 0);
+                if (totalSize > 10 * 1024 * 1024) {
+                    statusDiv.innerText = "Totale bestandsgrootte is te groot. Maximum is 10MB totaal.";
+                    statusDiv.className = "nrt-status-error";
+                    statusDiv.style.display = "block";
+                    submitBtn.value = "Aanvragen";
+                    submitBtn.disabled = false;
+                    return;
+                }
+
                 for (let i = 0; i < fileInput.files.length; i++) {
                     const file = fileInput.files[i];
-                    const base64Content = await fileToBase64(file);
+
+                    // Per foto max 3MB
+                    if (file.size > 3 * 1024 * 1024) {
+                        statusDiv.innerText = `Foto "${file.name}" is te groot. Maximum is 3MB per foto.`;
+                        statusDiv.className = "nrt-status-error";
+                        statusDiv.style.display = "block";
+                        submitBtn.value = "Aanvragen";
+                        submitBtn.disabled = false;
+                        return;
+                    }
+
+                    const base64Content = await resizeImage(file);
                     payload.attachments.push({
                         filename: file.name,
                         content: base64Content,
-                        type: file.type
+                        type: 'image/jpeg'
                     });
                 }
             }
 
-            // 4. Versturen naar de API
             const response = await fetch(API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -6174,13 +6217,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (response.ok) {
-                // 5. Succes afhandeling
                 statusDiv.innerText = "Bedankt! Uw aanvraag is succesvol verzonden. Wij nemen spoedig contact op.";
                 statusDiv.className = "nrt-status-success";
                 statusDiv.style.display = "block";
                 form.reset(); 
                 
-                // Reset de upload tekst
                 const uploadText = document.querySelector('.nrt-custom-upload p');
                 if(uploadText) uploadText.innerHTML = "Verslepen en neerzetten (of) <b>kies bestanden</b>";
                 
@@ -6189,13 +6230,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
         } catch (error) {
-            // 6. Fout afhandeling
             console.error('Fout bij verzenden:', error);
             statusDiv.innerText = "Er is iets misgegaan bij het verzenden. Probeer het later opnieuw.";
             statusDiv.className = "nrt-status-error";
             statusDiv.style.display = "block";
         } finally {
-            // Reset knop
             submitBtn.value = "Aanvragen";
             submitBtn.disabled = false;
         }
