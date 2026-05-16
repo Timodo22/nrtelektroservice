@@ -6140,8 +6140,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const fileInput = form.querySelector('input[name="file-631"]');
             if (fileInput && fileInput.files.length > 0) {
+
+                // Totaal limiet: max 10MB
+                const totalSize = Array.from(fileInput.files).reduce((sum, f) => sum + f.size, 0);
+                if (totalSize > 10 * 1024 * 1024) {
+                    statusDiv.innerText = "Totale bestandsgrootte is te groot. Maximum is 10MB totaal.";
+                    statusDiv.className = "nrt-status-error";
+                    statusDiv.style.display = "block";
+                    submitBtn.value = "Aanvragen";
+                    submitBtn.disabled = false;
+                    return;
+                }
+
                 for (let i = 0; i < fileInput.files.length; i++) {
                     const file = fileInput.files[i];
+
+                    // Per foto max 3MB
+                    if (file.size > 3 * 1024 * 1024) {
+                        statusDiv.innerText = `Foto "${file.name}" is te groot. Maximum is 3MB per foto.`;
+                        statusDiv.className = "nrt-status-error";
+                        statusDiv.style.display = "block";
+                        submitBtn.value = "Aanvragen";
+                        submitBtn.disabled = false;
+                        return;
+                    }
+
                     const base64Content = await resizeImage(file);
                     payload.attachments.push({
                         filename: file.name,
