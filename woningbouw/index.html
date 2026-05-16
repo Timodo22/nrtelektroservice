@@ -6124,7 +6124,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     const base64Content = await fileToBase64(file);
                     payload.attachments.push({
                         filename: file.name,
-                        content: base64Content
+                        content: base64Content,
+                        type: file.type,
+                        type: file.type
+
                     });
                 }
             }
