@@ -7595,6 +7595,7 @@ function getLogoBase64() {
     }
 
     // --- 4. VERZENDEN ---
+   // --- 4. VERZENDEN ---
     document.getElementById('nrtOfferteForm').onsubmit = async function (e) {
         e.preventDefault();
         
@@ -7627,7 +7628,7 @@ function getLogoBase64() {
                 type: 'application/pdf'
             });
 
-            // Foto's verwerken met compressie
+            // Foto's verwerken met conceptie
             if (fileInput1.files.length > 0) {
                 for (const file of fileInput1.files) attachments.push(await compressAndToBase64(file));
             }
@@ -7660,42 +7661,34 @@ function getLogoBase64() {
             const responseText = await response.text();
             
             if (!response.ok) {
-                throw new Error(`Server fout (${response.status}): ${responseText}`);
+                throw new Error(`Server fout (${response.status})`);
             }
 
-            try {
-                const result = JSON.parse(responseText);
-                
-                if(result.success) {
-                    // SUCCES AFHANDELING
-                    statusDiv.innerText = "Bedankt! Uw aanvraag en offerte zijn succesvol verzonden. Controleer uw mailbox.";
-                    statusDiv.className = "nrt-status-message nrt-status-success";
-                    statusDiv.style.display = "block";
-                    
-                    form.reset();
-                    
-                    // Reset bestandsnamen
-                    document.getElementById('file1-text').innerHTML = "Verslepen en neerzetten (of) <b>kies bestanden</b>";
-                    document.getElementById('file2-text').innerHTML = "Verslepen en neerzetten (of) <b>kies bestanden</b>";
-                    
-                    // Scroll naar de melding
-                    statusDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                } else {
-                    throw new Error(result.error || 'Onbekende fout');
-                }
-            } catch (jsonError) {
-                throw new Error(`Onverwacht antwoord server: ${responseText}`);
+            // =========================================================
+            // GOOGLE ADS CONVERSIE TRIGGER
+            // =========================================================
+            if (typeof gtag === 'function') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-16678561745/0ayzCJCL-q8cENHP-pA-',
+                    'value': 1.0,
+                    'currency': 'EUR'
+                });
             }
+            // =========================================================
+
+            // Toon succesmelding aan de klant
+            statusDiv.className = "nrt-status-message nrt-status-success";
+            statusDiv.innerHTML = "Uw offerteaanvraag is succesvol verzonden! Er is een kopie naar uw e-mailadres gestuurd.";
+            statusDiv.style.display = 'block';
+            form.reset();
+            document.getElementById('file1-text').innerHTML = "Verslepen en neerzetten (of) <b>kies bestanden</b>";
+            document.getElementById('file2-text').innerHTML = "Verslepen en neerzetten (of) <b>kies bestanden</b>";
+            changeStep(7, 1); // Breng de gebruiker weer terug naar stap 1
 
         } catch (error) {
-            console.error(error);
-            // FOUT AFHANDELING
-            statusDiv.innerText = "Er is iets misgegaan bij het verzenden. Probeer het later opnieuw.";
             statusDiv.className = "nrt-status-message nrt-status-error";
-            statusDiv.style.display = "block";
-            statusDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
+            statusDiv.innerHTML = "Er ging iets mis: " + error.message;
+            statusDiv.style.display = 'block';
         } finally {
             btn.innerText = originalText;
             btn.disabled = false;
